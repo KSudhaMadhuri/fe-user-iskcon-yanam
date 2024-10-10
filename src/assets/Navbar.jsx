@@ -1,5 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { FaHome, FaSearch} from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,7 +35,7 @@ export default function Navbar() {
   }, [dropdownRef, mobileMenuRef, dropdownOpen, mobileMenuOpen]);
 
   return (
-    <nav className="bg-gradient-to-r from-indigo-600 to-orange-500 w-full fixed top-0 z-50">
+    <nav className="bg-gradient-to-r from-indigo-700 to-yellow-500 w-full fixed top-0 z-50">
       <div className="mx-auto max-w-7xl px-2 sm:px-7 lg:px-7">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -89,59 +93,49 @@ export default function Navbar() {
                 alt="logo"
                 className="w-10 h-10 rounded mr-3"
               />
-              <h3 className="text-white font-semibold text-xl">ISKCON YANAM STORES</h3>
+              <h3 className="text-white font-semibold text-nowrap text-xl">
+                ISKCON YANAM STORES
+              </h3>
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <>
                   <Link
                     to="/"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                    className=" flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
                     aria-current="page"
                   >
+                   <FaHome/>
                     Home
                   </Link>
                   <Link
                     to="/cart"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                    className=" flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
                   >
+                    <FaCartShopping/>
                     Cart
                   </Link>
-                  
+                  <Link
+                    to="/search"
+                    className=" flex items-center gap-1  rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                  >
+                    <FaSearch/>
+                    Search
+                  </Link>
                 </>
               </div>
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {token ? (
-                  <>
-                    <button className="flex items-center justify-between gap-2 text-nowrap rounded-md px-3 py-2 text-sm font-medium text-white  ">
-                      <CgProfile /> {user.fullName}
-                    </button>
-
-                    <button
-                      onClick={logOut}
-                      className="bg-indigo-800 text-nowrap rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 hover:text-white"
-                    >
-                      Log out
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      to="/login"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white text-nowrap"
-                    >
-                      Log in
-                    </Link>
-                    <Link
-                      to="/signup"
-                      className=" text-nowrap rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
-                    >
-                      Sign up
-                    </Link>
-                  </>
-                )}
+                <>
+                  <Link
+                    to="/contact"
+                    className=" flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white text-nowrap"
+                  >
+                  <MdEmail/>
+                    Contact Us
+                  </Link>
+                </>
               </div>
             </div>
           </div>
@@ -152,72 +146,33 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="sm:hidden" id="mobile-menu" ref={mobileMenuRef}>
           <div className="space-y-1 px-2 pb-3 pt-2">
-            {token && (
-              <>
-                {user && user.role === "admin" && (
-                  <>
-                    <Link
-                      to="/"
-                      className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
-                      aria-current="page"
-                    >
-                      Home
-                    </Link>
-                    <Link
-                      to="/products"
-                      className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
-                    >
-                      Products
-                    </Link>
-                    <Link
-                      to="/orders"
-                      className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
-                    >
-                      Orders
-                    </Link>
-                  </>
-                )}
+            <Link
+              to="/"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+              aria-current="page"
+            >
+              Home
+            </Link>
+            <Link
+              to="/cart"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+            >
+              Cart
+            </Link>
 
-                {user && user.admin === "admin" && (
-                  <Link
-                    to="/admin"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
-                  >
-                    Admin
-                  </Link>
-                )}
-              </>
-            )}
+            <Link
+              to="/contact"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
+            >
+              Contact Us
+            </Link>
 
-            {token ? (
-              <>
-                <button className=" flex items-center justify-between gap-2  rounded-md px-3 py-2 text-base font-medium text-white ">
-                  <CgProfile /> {user.fullName}
-                </button>
-
-                <button
-                  onClick={logOut}
-                  className=" block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
-                >
-                  Log out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
-                >
-                  Log in
-                </Link>
-                <Link
-                  to="/signup"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
-                >
-                  Sign up
-                </Link>
-              </>
-            )}
+            <Link
+              to="/search"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
+            >
+              Search
+            </Link>
           </div>
         </div>
       )}
