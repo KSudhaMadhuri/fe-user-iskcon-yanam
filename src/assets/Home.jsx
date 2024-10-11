@@ -10,7 +10,9 @@ const Home = () => {
 
   return (
     <>
-    <Carousel/>
+    <div >
+      <Carousel/>
+    </div>
       <div className="bg-white " >
         <div className="mx-auto max-w-2xl px-4  sm:px-3  lg:max-w-7xl lg:px-10">
 
