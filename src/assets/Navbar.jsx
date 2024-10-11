@@ -148,10 +148,10 @@ export default function Navbar() {
           <div className="space-y-1 px-2 pb-3 pt-2">
             <Link
               to="/"
-              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+              className="flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
               aria-current="page"
             >
-              Home
+             <FaHome/> Home
             </Link>
             <Link
               to="/cart"
