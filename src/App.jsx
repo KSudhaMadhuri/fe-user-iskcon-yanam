@@ -9,6 +9,7 @@ import Search from './assets/Search'
 import Navbar from './assets/Navbar'
 import axios from 'axios'
 import ProductOverView from './assets/ProductOverView'
+import "react-toastify/dist/ReactToastify.css";
 
 export const productsContext = createContext()
 

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { productsContext } from '../App'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
+import Carousel from './Carousel'
  
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
 
   return (
     <>
+    <Carousel/>
       <div className="bg-white " >
         <div className="mx-auto max-w-2xl px-4  sm:px-3  lg:max-w-7xl lg:px-10">
 
