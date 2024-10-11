@@ -1,11 +1,14 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
 const ProductOverView = () => {
   const api = import.meta.env.VITE_API;
   const [data, setData] = useState({})
   const { bookId } = useParams()
+  const previousTitle = useRef(document.title)
+
+
 
   // fetching single book data from server
   useEffect(() => {
@@ -13,8 +16,6 @@ const ProductOverView = () => {
       try {
         const response = await axios.get(`${api}/book/getsinglebook/${bookId}`);
         if (response) {
-          console.log(response);
-          
           setData(response.data);
         }
       } catch (error) {
@@ -24,6 +25,17 @@ const ProductOverView = () => {
     fetchBook();
   }, [bookId]);
 
+  
+  // title changing dyanmically 
+  useEffect(() => {
+    if (data && data.bookName) {
+      document.title = data.bookName
+      previousTitle.current = data.bookName
+    } else {
+      document.title = previousTitle.current
+    }
+  }, [data])
+
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
@@ -31,7 +43,7 @@ const ProductOverView = () => {
           <div className="flex flex-row justify-evenly w-full flex-wrap">
             <img
               alt="ecommerce"
-              className="lg:w-96 lg:h-96 sm:cursor-zoom-in"
+              className="lg:w-96 lg:h-96 rounded "
               src={data.bookImage}
 
             />
@@ -40,7 +52,7 @@ const ProductOverView = () => {
 
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                 
+
               </h2>
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
                 {data.bookName}
@@ -184,7 +196,7 @@ const ProductOverView = () => {
                 </span>
                 <Link to="/cart" className="flex ml-auto bg-gradient-to-tr from-pink-600 to-fuchsia-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none  rounded">
                   Go TO CART
-                </Link> : <button  className="flex ml-auto bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                </Link> : <button className="flex ml-auto bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                   ADD TO CART
                 </button>
 

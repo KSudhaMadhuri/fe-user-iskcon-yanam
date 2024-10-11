@@ -78,7 +78,7 @@ const Navbar = () => {
                   
                     <Link
                       to="/"
-                      className=" flex items-center gap-1 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
+                      className=" flex items-center gap-2 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
                       aria-current="page"
                     >
                       <FaHome />
@@ -86,14 +86,14 @@ const Navbar = () => {
                     </Link>
                     <Link
                       to="/cart"
-                      className=" flex items-center gap-1 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
+                      className=" flex items-center gap-2 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
                     >
                       <FaCartShopping />
                       Cart
                     </Link>
                     <Link
                       to="/search"
-                      className=" flex items-center gap-1  rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
+                      className=" flex items-center gap-2  rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
                     >
                       <FaSearch />
                       Search
@@ -106,7 +106,7 @@ const Navbar = () => {
                   
                     <Link
                       to="/contact"
-                      className=" flex items-center gap-1 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white text-nowrap"
+                      className=" flex items-center gap-2 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white text-nowrap"
                     >
                       <MdEmail />
                       Contact Us
@@ -126,28 +126,28 @@ const Navbar = () => {
           <div className="space-y-1 px-2 pb-3 pt-2">
            <Link
               to="/"
-              className="flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
               aria-current="page"
             >
               <FaHome /> Home
             </Link>
             <Link
               to="/cart"
-              className="flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
             >
               <FaCartShopping />  Cart
             </Link>
 
             <Link
               to="/search"
-              className="flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
             >
                  <FaSearch />  Search
             </Link>
 
             <Link
               to="/contact"
-              className="flex items-center gap-1 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
             >
                <MdEmail />  Contact Us
             </Link>
