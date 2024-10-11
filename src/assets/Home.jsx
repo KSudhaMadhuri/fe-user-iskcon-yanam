@@ -165,12 +165,7 @@ const Home = () => {
             <p className="leading-relaxed text-lg">
               Discover the timeless wisdom of the International Society for Krishna Consciousness (ISKCON) through our curated collection of spiritual books. Whether you are a long-time devotee or just beginning your spiritual journey, our books offer deep insights into the teachings of Bhagavad-gita, Srimad Bhagavatam, and the works of A.C. Bhaktivedanta Swami Prabhupada.
             </p>
-            <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6" />
-            <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
-              HOLDEN CAULFIELD
-            </h2>
-            <p className="text-gray-500">Senior Product Designer</p>
-          </div>
+            </div>
         </div>
       </section>
 

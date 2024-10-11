@@ -8,7 +8,6 @@ const ContactUs = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-
   return (
 
     <>
@@ -179,7 +178,7 @@ const ContactUs = () => {
             <span>{activeIndex === 2 ? '-' : '+'}</span>
           </button>
           <div className={`p-4 text-gray-700 ${activeIndex === 2 ? '' : 'hidden'}`}>
-            You can modify or cancel your order before it is shipped. Once dispatched, we are unable to make changes. Contact our support team as soon as possible if you need assistance.
+           Once dispatched, we are unable to make changes. Contact our support team as soon as possible if you need assistance.
           </div>
         </div>
 
@@ -193,8 +192,8 @@ const ContactUs = () => {
             <span>{activeIndex === 3 ? '-' : '+'}</span>
           </button>
           <div className={`p-4 text-gray-700 ${activeIndex === 3 ? '' : 'hidden'}`}>
-            Yes, we do! We offer international shipping to select countries. Shipping costs and times will vary depending on your location.
-          </div>
+          Thank you for your interest! Unfortunately, we currently do not offer international shipping. We appreciate your understanding!
+              </div>
         </div>
 
         {/* Accordion Item 5 */}
