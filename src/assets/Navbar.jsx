@@ -1,9 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { FaHome, FaSearch} from "react-icons/fa";
+import { FaHome, FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -105,21 +104,21 @@ export default function Navbar() {
                     className=" flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
                     aria-current="page"
                   >
-                   <FaHome/>
+                    <FaHome />
                     Home
                   </Link>
                   <Link
                     to="/cart"
                     className=" flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
                   >
-                    <FaCartShopping/>
+                    <FaCartShopping />
                     Cart
                   </Link>
                   <Link
                     to="/search"
                     className=" flex items-center gap-1  rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
                   >
-                    <FaSearch/>
+                    <FaSearch />
                     Search
                   </Link>
                 </>
@@ -132,7 +131,7 @@ export default function Navbar() {
                     to="/contact"
                     className=" flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white text-nowrap"
                   >
-                  <MdEmail/>
+                    <MdEmail />
                     Contact Us
                   </Link>
                 </>
