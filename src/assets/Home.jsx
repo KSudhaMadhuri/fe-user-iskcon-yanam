@@ -3,14 +3,14 @@ import { productsContext } from '../App'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import Carousel from './Carousel'
- 
+
 
 const Home = () => {
   const { products } = useContext(productsContext)
 
   return (
     <>
-    <Carousel/>
+      <Carousel />
       <div className="bg-white " >
         <div className="mx-auto max-w-2xl px-4  sm:px-3  lg:max-w-7xl lg:px-10">
 
@@ -45,111 +45,30 @@ const Home = () => {
                   </div>
                 </Link>
               ))}
-            </> : <>
+            </> : (
+            
+            
+              [...Array(8)].map((_, index)=>(
+                <div key={index} className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative rounded">
+                  <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
+                  ></div>
+                  <div className="mt-4 flex gap-2 justify-between items-center ">
+                    <div className='w-full'>
+                      <h3 className="text-sm  bg-slate-400 h-4  ">
+                      </h3>
+                    </div>
+                    <h3 className="text-sm bg-slate-400 h-4 w-8 ">
+                    </h3>
+                  </div>
+                </div>
+              ))
 
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
-              <div className=" animate-pulse group w-40 h-62 md:w-52 md:h-64 lg:w-72 lg:h-96 p-3 relative  rounded">
-                <div className="bg-slate-400 h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded "
-                ></div>
-                <div className="mt-4 flex gap-2 justify-between items-center ">
-                  <div className='w-full'>
-                    <h3 className="text-sm  bg-slate-400 h-4  ">
-                    </h3>
-                  </div>
-                  <h3 className="text-sm bg-slate-400 h-4 w-8 ">
-                  </h3>
-                </div>
-              </div>
+               
+           
+            )
 
 
-
-
-
-
-            </>
+            
             }
           </div>
         </div>
@@ -167,12 +86,12 @@ const Home = () => {
             <p className="leading-relaxed text-lg">
               Discover the timeless wisdom of the International Society for Krishna Consciousness (ISKCON) through our curated collection of spiritual books. Whether you are a long-time devotee or just beginning your spiritual journey, our books offer deep insights into the teachings of Bhagavad-gita, Srimad Bhagavatam, and the works of A.C. Bhaktivedanta Swami Prabhupada.
             </p>
-            </div>
+          </div>
         </div>
       </section>
 
 
-      
+
 
       <Footer />
     </>
