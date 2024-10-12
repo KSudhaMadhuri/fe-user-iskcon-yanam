@@ -78,7 +78,7 @@ const ContactUs = () => {
                     type="text"
                     id="name"
                     name="name"
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border-2 border-2-gray-300 focus:border-2-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
               </div>
@@ -99,7 +99,7 @@ const ContactUs = () => {
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border-2 border-2-gray-300 focus:border-2-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
               </div>
@@ -118,20 +118,20 @@ const ContactUs = () => {
                     value={message}
                     id="message"
                     name="message"
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border-2 border-2-gray-300 focus:border-2-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                     placeholder="Enter your query"
                   />
                 </div>
               </div>
               <div className="p-2 w-full">
                 {submitSpin ? (
-                  <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                  <button className="flex mx-auto text-white bg-indigo-500 border-2-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                     Submitting...
                   </button>
                 ) : (
                   <button
                     onClick={submitFunc}
-                    className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    className="flex mx-auto text-white bg-indigo-500 border-2-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                   >
                     Submit
                   </button>
@@ -148,7 +148,7 @@ const ContactUs = () => {
         </h2>
         <div className="space-y-4">
           {/* Accordion Item 1 */}
-          <div className="border rounded-lg">
+          <div className="border-2 rounded-lg">
             <button
               onClick={() => toggleAccordion(0)}
               className="w-full text-left p-4 bg-gray-100 focus:outline-none flex justify-between items-center"
@@ -169,7 +169,7 @@ const ContactUs = () => {
           </div>
 
           {/* Accordion Item 2 */}
-          <div className="border rounded-lg">
+          <div className="border-2 rounded-lg">
             <button
               onClick={() => toggleAccordion(1)}
               className="w-full text-left p-4 bg-gray-100 focus:outline-none flex justify-between items-center"
@@ -192,7 +192,7 @@ const ContactUs = () => {
           </div>
 
           {/* Accordion Item 3 */}
-          <div className="border rounded-lg">
+          <div className="border-2 rounded-lg">
             <button
               onClick={() => toggleAccordion(2)}
               className="w-full text-left p-4 bg-gray-100 focus:outline-none flex justify-between items-center"
@@ -213,7 +213,7 @@ const ContactUs = () => {
           </div>
 
           {/* Accordion Item 4 */}
-          <div className="border rounded-lg">
+          <div className="border-2 rounded-lg">
             <button
               onClick={() => toggleAccordion(3)}
               className="w-full text-left p-4 bg-gray-100 focus:outline-none flex justify-between items-center"
@@ -234,7 +234,7 @@ const ContactUs = () => {
           </div>
 
           {/* Accordion Item 5 */}
-          <div className="border rounded-lg">
+          <div className="border-2 rounded-lg">
             <button
               onClick={() => toggleAccordion(4)}
               className="w-full text-left p-4 bg-gray-100 focus:outline-none flex justify-between items-center"
