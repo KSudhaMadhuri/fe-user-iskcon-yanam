@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
     <Carousel/>
-      <div className="bg-white " >
+      <div className="bg-white mt-5" >
         <div className="mx-auto max-w-2xl px-4  sm:px-3  lg:max-w-7xl lg:px-10">
 
           <div className='flex justify-between'>
