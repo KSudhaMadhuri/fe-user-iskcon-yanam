@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
@@ -43,6 +43,11 @@ const ContactUs = () => {
       setSubmitSpin(false);
     }
   };
+
+
+  useEffect(()=>{
+document.title = "Contact Us for any delivery queries"
+  },[])
 
   return (
     <>
