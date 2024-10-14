@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import Products from './Products';
 import Footer from './Footer';
+import { productsContext } from '../App';
 
 const ProductOverView = () => {
   const api = import.meta.env.VITE_API;
@@ -12,7 +13,7 @@ const ProductOverView = () => {
   const { bookId } = useParams()
   const previousTitle = useRef(document.title)
   const [spin, setSpin] = useState(false)
-
+  const { cart , products } = useContext(productsContext)
 
   // fetching single book data from server
   useEffect(() => {
@@ -34,6 +35,15 @@ const ProductOverView = () => {
     fetchBook();
   }, [bookId]);
 
+
+  // added cart function 
+  const addCartFunc = (bookId) => {
+    const addedItem = products.find((item) => item._id === bookId)
+    const addCart = [...cart, { ...addedItem, qty: 1 }]
+    setCart(addCart)
+    toast.success("Book added to cart")
+    localStorage.setItem("cart", JSON.stringify(addCart))
+  }
 
   // title changing dyanmically 
   useEffect(() => {
@@ -93,10 +103,13 @@ const ProductOverView = () => {
 
 
                 <div className="flex gap-3 justify-start my-5">
-                  <button className=" bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                 
+                 {cart.some((item)=> item._id === data._id) ?  <button className=" bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                    GO TO CART
+                  </button>: <button onClick={()=>addCartFunc(data._id)} className="bg-gradient-to-tr from-ingigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                     ADD TO CART
-                  </button>
-                  <button className="bg-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-orange-800 rounded">
+                  </button>}
+                  <button className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded">
                     BUY NOW
                   </button>
                 </div>

@@ -46,12 +46,12 @@ const {cart , setCart} = useContext(productsContext)
                     </div>
                   </div>
                   <h6 className="mt-3 title-font font-medium text-2xl text-gray-900">
-                    ${item.price.toFixed(2) * item.qty}
+                    ${item.bookPrice}
                   </h6>
                   <button className="font-semibold p-1 mr-5 rounded border-2 border-blue-600 hover:border-slate-600 bg-blue-600 text-white hover:bg-slate-600  w-32  mt-4">
                     BUY NOW
                   </button>
-                  <button onClick={() => removeFunction(item.id)} className="font-semibold border-2 p-1 hover:border-red-600 rounded hover:bg-red-600 hover:text-white border-black w-32 text-center text-black mt-4">
+                  <button   className="font-semibold border-2 p-1 hover:border-red-600 rounded hover:bg-red-600 hover:text-white border-black w-32 text-center text-black mt-4">
                     REMOVE
                   </button>
 

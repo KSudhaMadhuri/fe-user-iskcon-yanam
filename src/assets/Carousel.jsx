@@ -46,18 +46,7 @@ const Carousel = () => {
       </div>
 
       {/* Navigation buttons */}
-      <button
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-neutral-800 p-2 text-white rounded-full"
-        onClick={prevSlide}
-      >
-        &lt;
-      </button>
-      <button
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-neutral-800 p-2 text-white rounded-full"
-        onClick={nextSlide}
-      >
-        &gt;
-      </button>
+
 
       {/* Optional Indicator dots */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">

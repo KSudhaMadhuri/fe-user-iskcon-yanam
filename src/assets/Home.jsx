@@ -3,28 +3,23 @@ import { productsContext } from '../App'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import Carousel from './Carousel'
+import { toast, ToastContainer } from 'react-toastify'
 
 
 const Home = () => {
   const { products, cart, setCart } = useContext(productsContext)
-  const [bookIds, setBookIds] = useState([])
+   
 
   // added cart function 
   const addCartFunc = (bookId) => {
     const addedItem = products.find((item) => item._id === bookId)
     const addCart = [...cart, { ...addedItem, qty: 1 }]
     setCart(addCart)
+    toast.success("Book added to cart")
     localStorage.setItem("cart", JSON.stringify(addCart))
   }
 
-  // checking book whether added cart or not
-  useEffect(() => {
-    const isAvailable = cart.map((item) => {
-      return item._id
-    })
-    setBookIds([...bookIds, isAvailable])
-
-  }, [cart])
+   
 
   useEffect(() => {
     document.title = "ISKCON Yanam Stores"
@@ -32,6 +27,8 @@ const Home = () => {
 
   return (
     <>
+    
+  <ToastContainer position='bottom-center' theme='dark'/>
       <Carousel />
       <div className="bg-white mt-5" >
         <div className="mx-auto max-w-2xl px-4  sm:px-3  lg:max-w-7xl lg:px-10">
@@ -47,12 +44,12 @@ const Home = () => {
             {products.length ? <>
               {products.map((item) => (
 
-                <div key={item.id} className="group border-2 rounded border-red-300 w-full   md:w-52   lg:w-72   p-3 relative  hover:opacity-85">
+                <div key={item.id} className="group border-2 rounded border-red-300 w-full sm:w-[12rem]  md:w-52   lg:w-72   p-3 relative  hover:opacity-85">
                   <Link to={`/${item._id}`} className=''>
                     <img
                       src={item.bookImage}
                       alt={item.bookName}
-                      className="h-44 w-full md:w-full md:h-56 lg:h-80 lg:w-72 rounded"
+                      className="h-44 w-full sm:w-[10rem] md:w-full md:h-56 lg:h-80 lg:w-72 rounded"
                     />
                   </Link>
 
@@ -64,10 +61,19 @@ const Home = () => {
                       </h3>
                     </div>
                     <p className="text-sm  font-medium text-nowrap text-gray-900">₹ {item.bookPrice}</p>
-                  </div> {bookIds.includes(item._id) ? <button className='rounded h-7 mt-2 bg-blue-500 text-white w-full'>Go To Cart</button>
-                    :
-                    <button onClick={() => addCartFunc(item._id)} className='rounded h-7 mt-2 bg-orange-500 text-white w-full'>Add To Cart</button>
-                  }
+                  </div>
+                  {cart.some(cartItem => cartItem._id === item._id) ? (
+                    <Link to="/cart" className='rounded h-7 mt-2 bg-indigo-800 block text-center text-white w-full'>
+                      Go To Cart
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => addCartFunc(item._id)}
+                      className='rounded h-7 mt-2 bg-orange-500 text-white w-full'
+                    >
+                      Add To Cart
+                    </button>
+                  )}
                 </div>
               ))}
             </> : (
