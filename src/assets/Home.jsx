@@ -6,13 +6,29 @@ import Carousel from './Carousel'
 
 
 const Home = () => {
-  const { products } = useContext(productsContext)
+  const { products, cart, setCart } = useContext(productsContext)
+  const [bookIds, setBookIds] = useState([])
 
+  // added cart function 
+  const addCartFunc = (bookId) => {
+    const addedItem = products.find((item) => item._id === bookId)
+    const addCart = [...cart, { ...addedItem, qty: 1 }]
+    setCart(addCart)
+    localStorage.setItem("cart", JSON.stringify(addCart))
+  }
 
+  // checking book whether added cart or not
+  useEffect(() => {
+    const isAvailable = cart.map((item) => {
+      return item._id
+    })
+    setBookIds([...bookIds, isAvailable])
 
-  useEffect(()=>{
+  }, [cart])
+
+  useEffect(() => {
     document.title = "ISKCON Yanam Stores"
-      },[])
+  }, [])
 
   return (
     <>
@@ -48,8 +64,10 @@ const Home = () => {
                       </h3>
                     </div>
                     <p className="text-sm  font-medium text-nowrap text-gray-900">₹ {item.bookPrice}</p>
-                  </div>
-                  <button className='rounded h-7 mt-2 bg-orange-500 text-white w-full'>Add To Cart</button>
+                  </div> {bookIds.includes(item._id) ? <button className='rounded h-7 mt-2 bg-blue-500 text-white w-full'>Go To Cart</button>
+                    :
+                    <button onClick={() => addCartFunc(item._id)} className='rounded h-7 mt-2 bg-orange-500 text-white w-full'>Add To Cart</button>
+                  }
                 </div>
               ))}
             </> : (

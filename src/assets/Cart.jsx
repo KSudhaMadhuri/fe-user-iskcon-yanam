@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Footer from './Footer'
+import { productsContext } from '../App'
 
 const Cart = () => {
-
+const {cart , setCart} = useContext(productsContext)
 
 
 
@@ -17,18 +18,16 @@ const Cart = () => {
             {cart.length ? <>  {cart.map((item) => (
               <div key={item.id} className="py-8 flex lg:gap-x-8 flex-wrap md:flex-nowrap">
                 <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col m-auto">
-                  <img src={item.image} alt={item.title} className='w-72 h-72' />
+                  <img src={item.bookImage} alt={item.title} className='w-72 h-72' />
 
                 </div>
                 <div className="md:flex-grow">
-                  <p className="leading-relaxed uppercase">
-                    {item.category}
-                  </p>
+                   
                   <h2 className="text-2xl font-medium  text-gray-900 title-font mb-2">
-                    {item.title}
+                    {item.bookName}
                   </h2>
                   <p className="leading-relaxed">
-                    {item.description.substring(0, 260)}...
+                    {item.bookSummary.substring(0, 260)}...
                   </p>
                   <div className='flex'>
                     <div className='items-center mt-2 flex flex-col'>
