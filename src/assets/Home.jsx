@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { productsContext } from '../App'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
@@ -7,6 +7,12 @@ import Carousel from './Carousel'
 
 const Home = () => {
   const { products } = useContext(productsContext)
+
+
+
+  useEffect(()=>{
+    document.title = "ISKCON Yanam Stores"
+      },[])
 
   return (
     <>
@@ -80,7 +86,7 @@ const Home = () => {
               Discover the timeless wisdom of the International Society for Krishna Consciousness (ISKCON) through our curated collection of spiritual books. Whether you are a long-time devotee or just beginning your spiritual journey, our books offer deep insights into the teachings of Bhagavad-gita, Srimad Bhagavatam, and the works of A.C. Bhaktivedanta Swami Prabhupada.
             </p>
           </div>
-          
+
         </div>
       </section>
 

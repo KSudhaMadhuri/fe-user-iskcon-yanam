@@ -52,9 +52,8 @@ const Carousel = () => {
         {images.map((_, index) => (
           <div
             key={index}
-            className={`w-3 h-3 bg-white rounded-full ${
-              index === currentIndex ? "bg-opacity-75" : "bg-opacity-50"
-            }`}
+            className={`w-3 h-3 bg-white rounded-full ${index === currentIndex ? "bg-opacity-75" : "bg-opacity-50"
+              }`}
             onClick={() => setCurrentIndex(index)}
           />
         ))}
