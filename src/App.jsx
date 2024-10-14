@@ -17,7 +17,7 @@ export const productsContext = createContext();
 function App() {
   const api = import.meta.env.VITE_API;
   const [products, setProducts] = useState([])
- 
+  const [cart, setCart] = useState([])
 
   // fetching books data from server
   useEffect(() => {
@@ -36,11 +36,10 @@ function App() {
 
   return (
     <>
-      <productsContext.Provider value={{ products, setProducts , cart , setCart}}>
+      <productsContext.Provider value={{ products, setProducts, cart, setCart }}>
         <Navbar />
         <Routes>
           <Route path="/" element={<ProductsList />} />
-
           <Route path="/cart" element={<Cart />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/contact" element={<ContactUs />} />
