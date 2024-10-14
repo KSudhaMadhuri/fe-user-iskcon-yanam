@@ -10,14 +10,13 @@ import Navbar from "./assets/Navbar";
 import axios from "axios";
 import ProductOverView from "./assets/ProductOverView";
 import "react-toastify/dist/ReactToastify.css";
-import ProductsList from "./assets/ProductsList";
 
 export const productsContext = createContext();
 
 function App() {
   const api = import.meta.env.VITE_API;
   const [products, setProducts] = useState([])
- 
+ const [cart,setCart]=useState([])
 
   // fetching books data from server
   useEffect(() => {
@@ -39,9 +38,8 @@ function App() {
       <productsContext.Provider value={{ products, setProducts , cart , setCart}}>
         <Navbar />
         <Routes>
-          <Route path="/" element={<ProductsList />} />
-
-          <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/cart" element={<Cart />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/search" element={<Search />} />
