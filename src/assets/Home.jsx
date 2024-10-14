@@ -8,18 +8,18 @@ import { toast, ToastContainer } from 'react-toastify'
 
 const Home = () => {
   const { products, cart, setCart } = useContext(productsContext)
-   
+
 
   // added cart function 
   const addCartFunc = (bookId) => {
     const addedItem = products.find((item) => item._id === bookId)
     const addCart = [...cart, { ...addedItem, qty: 1 }]
     setCart(addCart)
-    toast.success("Book added to cart")
+    toast.success("Item added to cart")
     localStorage.setItem("cart", JSON.stringify(addCart))
   }
 
-   
+
 
   useEffect(() => {
     document.title = "ISKCON Yanam Stores"
@@ -27,8 +27,8 @@ const Home = () => {
 
   return (
     <>
-    
-  <ToastContainer position='bottom-center' theme='dark'/>
+
+      <ToastContainer position='bottom-center' theme='dark' />
       <Carousel />
       <div className="bg-white mt-5" >
         <div className="mx-auto max-w-2xl px-4  sm:px-3  lg:max-w-7xl lg:px-10">
@@ -62,18 +62,28 @@ const Home = () => {
                     </div>
                     <p className="text-sm  font-medium text-nowrap text-gray-900">₹ {item.bookPrice}</p>
                   </div>
-                  {cart.some(cartItem => cartItem._id === item._id) ? (
-                    <Link to="/cart" className='rounded h-7 mt-2 bg-indigo-800 block text-center text-white w-full'>
-                      Go To Cart
-                    </Link>
-                  ) : (
+                  {item.outOfStock === "outofstock"
+                    ?
                     <button
-                      onClick={() => addCartFunc(item._id)}
-                      className='rounded h-7 mt-2 bg-orange-500 text-white w-full'
+                       
+                      className='rounded h-8 mt-2 bg-red-500 text-white w-full'
                     >
-                      Add To Cart
-                    </button>
-                  )}
+                      Out of stock
+                    </button> : <>
+                      {cart.some(cartItem => cartItem._id === item._id) ? (
+                        <Link to="/cart" className='rounded-full h-8 mt-2 bg-indigo-800  flex justify-center items-center text-center text-white w-full'>
+                          Go To Cart
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => addCartFunc(item._id)}
+                          className='rounded-full h-8 mt-2 bg-orange-500 text-white w-full'
+                        >
+                          Add To Cart
+                        </button>
+                      )}
+                    </>}
+
                 </div>
               ))}
             </> : (

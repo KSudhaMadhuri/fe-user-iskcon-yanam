@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { FaMinus } from "react-icons/fa6";
-import { FaPlus } from "react-icons/fa";
 import Products from './Products';
 import Footer from './Footer';
 import { productsContext } from '../App';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ProductOverView = () => {
   const api = import.meta.env.VITE_API;
@@ -13,7 +12,10 @@ const ProductOverView = () => {
   const { bookId } = useParams()
   const previousTitle = useRef(document.title)
   const [spin, setSpin] = useState(false)
-  const { cart , products } = useContext(productsContext)
+  const { cart, products, setCart } = useContext(productsContext)
+
+
+
 
   // fetching single book data from server
   useEffect(() => {
@@ -24,12 +26,9 @@ const ProductOverView = () => {
         if (response) {
           setData(response.data);
           setSpin(false)
-
         }
       } catch (error) {
         console.log(error);
-
-
       }
     };
     fetchBook();
@@ -57,12 +56,9 @@ const ProductOverView = () => {
 
   return (
     <>
-
+      <ToastContainer position='bottom-center' theme='dark' />
       {spin ?
-
-
         <div className='mt-20 pt-20 flex justify-center items-center font-semibold text-xl ' style={{ height: "70vh" }}>
-
           Loading...
         </div> : <section className="text-gray-600 body-font overflow-hidden">
           <div className=" px-5 py-24 pb-8 mx-auto">
@@ -93,26 +89,26 @@ const ProductOverView = () => {
                   <span className='text-lg font-semibold text-black'>  ₹{data.bookPrice}</span>
                 </div>
 
+                {data.outOfStock === "stock" && (<>
 
-                <div className="flex gap-4 mb-4 items-center">
-                  <h5 className='font-semibold mb-3'>Quantity :</h5>
-                  <div className='font-semibold border-2 rounded text-orange-600 h-10 w-10 flex justify-center border-orange-700 items-center'><FaMinus /></div>
-                  <h5 className='text-lg font-semibold'>1</h5>
-                  <div className='text-lg font-semibold rounded  text-orange-600 h-10 w-10  border-2 border-orange-700 flex justify-center items-center'><FaPlus /></div>
-                </div>
+                  <div className="flex gap-3 justify-start my-5">
 
+                    {cart.some((item) => item._id === data._id) ? <Link to="/cart" className=" bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                      GO TO CART
+                    </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                      ADD TO CART
+                    </button>}
+                    <button className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded-full">
+                      BUY NOW
+                    </button>
+                  </div>
 
-                <div className="flex gap-3 justify-start my-5">
-                 
-                 {cart.some((item)=> item._id === data._id) ?  <button className=" bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                    GO TO CART
-                  </button>: <button onClick={()=>addCartFunc(data._id)} className="bg-gradient-to-tr from-ingigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                    ADD TO CART
-                  </button>}
-                  <button className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded">
-                    BUY NOW
-                  </button>
-                </div>
+                </>)}
+
+                {data.outOfStock === "outofstock" &&
+
+                  <h5 className='text-lg mb-3 font-semibold text-red-600'>Currently out of stock</h5>
+                }
                 <div className='w-full'>
 
                   <h4 className='font-semibold text-xl text-gray-900'>Product Details</h4>

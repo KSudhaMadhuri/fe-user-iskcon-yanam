@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { FaHome, FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { productsContext } from "../App";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null); // Create a ref for the menu
+const {cart } = useContext(productsContext)
+
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -100,9 +103,12 @@ const Navbar = () => {
                   </Link>
                   <Link
                     to="/cart"
-                    className=" flex items-center gap-2 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
+                    className="relative flex items-center gap-2 rounded-md px-3 py-2 text-md font-medium text-white hover:bg-gray-700 hover:text-white"
                   >
                     <FaCartShopping />
+                    <div className="bg-blue-900 absolute top-0 left-[0.90rem]   h-[1.19rem] w-[1.19rem] rounded-full flex justify-center items-center">
+                      <h6 className="text-[0.8rem]">{cart.length}</h6>
+                    </div>
                     Cart
                   </Link>
                   <Link
@@ -141,9 +147,13 @@ const Navbar = () => {
             </Link>
             <Link
               to="/cart"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+              className="flex relative items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
             >
-              <FaCartShopping /> Cart
+              <FaCartShopping /> 
+              <div className="bg-blue-900 absolute top-0 left-[0.90rem]   h-[1.19rem] w-[1.19rem] rounded-full flex justify-center items-center">
+                      <h6 className="text-[0.8rem]">{cart.length}</h6>
+                    </div>
+              Cart
             </Link>
             <Link
               to="/search"
