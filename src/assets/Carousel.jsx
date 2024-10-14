@@ -47,13 +47,13 @@ const Carousel = () => {
 
       {/* Navigation buttons */}
       <button
-        className="absolute left-0 top-1/2 h-20 ml-1 transform-translate-y-1/2 bg-neutral-800 hover:bg-gray-600 p-2 text-white rounded-full"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-neutral-800 p-2 text-white rounded-full"
         onClick={prevSlide}
       >
         &lt;
       </button>
       <button
-        className="absolute right-0 top-1/2 transform-translate-y-1/2 bg-neutral-800 p-2 text-white h-20 mr-1 hover:bg-gray-600 rounded-full"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-neutral-800 p-2 text-white rounded-full"
         onClick={nextSlide}
       >
         &gt;
