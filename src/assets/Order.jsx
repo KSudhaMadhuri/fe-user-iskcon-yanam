@@ -207,6 +207,7 @@ const Order = () => {
                     </label>
                     <div className="mt-2">
                       <input
+                      required
                         type="text"
                         name="fullName"
                         placeholder="Full Name"
@@ -227,6 +228,7 @@ const Order = () => {
                     </label>
                     <div className="mt-2">
                       <input
+                         required
                         type="text"
                         placeholder="Phone"
                         value={data.phone}
@@ -249,6 +251,7 @@ const Order = () => {
                       <input
                         id="email"
                         name="email"
+                        required
                         placeholder="Email"
                         value={data.email}
                         onChange={handleInputChange}
@@ -272,6 +275,7 @@ const Order = () => {
                       <select
                         id="state"
                         name="state"
+                        required
                         value={data.state}
                         onChange={handleInputChange}
                         autoComplete="state-name"
@@ -298,6 +302,7 @@ const Order = () => {
                       <input
                         type="text"
                         name="address"
+                        required
                         placeholder="Address"
                         value={data.address}
                         onChange={handleInputChange}
@@ -318,6 +323,7 @@ const Order = () => {
                       <input
                         type="text"
                         name="city"
+                        required
                         placeholder="City"
                         value={data.city}
                         onChange={handleInputChange}
@@ -339,6 +345,7 @@ const Order = () => {
                       <input
                         type="text"
                         name="pin"
+                        required
                         placeholder="PIN"
                         value={data.pin}
                         onChange={handleInputChange}
@@ -357,18 +364,19 @@ const Order = () => {
                 <h2 className="font-bold  text-orange-600">
                   PAYMENT UPI QR CODE
                 </h2>
-                {
-                  paymentImg ? <img
-                    src={paymentImg}
-                    alt="receipt"
-                    className="mt-5 h-[21rem] w-52 rounded"
-                  /> : <img
-                    src="/qrcode.jpg"
-                    alt="qr_code"
-                    className="mt-5 h-52 w-52 rounded"
-                  />
-                }
-
+                <div className='h-[14.7rem] overflow-y-auto'>
+                  {
+                    paymentImg ? <img
+                      src={paymentImg}
+                      alt="receipt"
+                      className="mt-5 h-auto w-52 rounded"
+                    /> : <img
+                      src="/qrcode.jpg"
+                      alt="qr_code"
+                      className="mt-5 h-52 w-52 rounded"
+                    />
+                  }
+                </div>
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
                   <span class="font-semibold text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
@@ -483,10 +491,10 @@ const Order = () => {
         <div className='text-center flex flex-col items-center justify-center'>
           <FaCircleCheck size={150} className='text-green-500' />
           <h2 className="text-black text-2xl mt-4">Order Placed Successfully!</h2>
-        <p className="text-black text-lg mt-2">
-          You will receive the order details in your email.
-        </p>
-        <Link to="/" className="text-blue-700 font-semibold">Continue Shopping</Link>
+          <p className="text-black text-lg mt-2">
+            You will receive the order details in your email.
+          </p>
+          <Link to="/" className="text-blue-700 font-semibold">Continue Shopping</Link>
         </div>
 
       </div>}
