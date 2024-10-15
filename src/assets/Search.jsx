@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Search = () => {
   const { products } = useContext(productsContext)
-  const [searchBooks, setSearchBooks] = useState([])
+  const [searchBooks, setSearchBooks] = useState(products)
   const [text, setText] = useState("")
   const searchRef = useRef()
 
@@ -19,10 +19,7 @@ const Search = () => {
     const searchresults = products.filter((item) =>
       item.bookName.toLowerCase().includes(text.toLowerCase())
     );
-
-    if (searchresults.length) {
       setSearchBooks(searchresults);
-    }
   }, [text]);
 
 
@@ -36,7 +33,7 @@ const Search = () => {
       <div className='flex justify-center pt-5 mb-7'>
         <div className='relative w-full sm:w-auto'>
 
-          <input ref={searchRef} value={text} onChange={changeHandling} placeholder="Search for books" type="text" name="text" id="text" className=' w-full h-[3rem] lg:w-96 rounded-md border-2 border-gray-500 py-1.5 pl-12 pr-20 text-gray-900 outline-none placeholder:text-gray-800   sm:text-md sm:leading-6 placeholder="0.00' />
+          <input ref={searchRef} value={text} onChange={changeHandling} placeholder="Search for books" type="text" name="text" id="text" className=' w-full h-[3rem] lg:w-96 rounded-full border-2 border-gray-500 py-1.5 pl-12 pr-20 text-gray-900 outline-none placeholder:text-gray-800   sm:text-md sm:leading-6 placeholder="0.00' />
           <span className='left-4 top-[0.9rem] absolute  text-gray-600'><FaSearch size={20} /></span>
         </div>
       </div>

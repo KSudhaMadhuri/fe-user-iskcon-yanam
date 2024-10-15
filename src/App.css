@@ -8,3 +8,45 @@ body::-webkit-scrollbar{
     display: none;
 }
 
+/* order page styling  */
+
+.checkout-page {
+    padding: 10px;
+    background-color: #f9f0e5;
+  }
+  
+  .checkout-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
+     margin-bottom: 15px;
+  }
+  
+  .address-section, .order-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .address-section {
+    width: 60%;
+  }
+  
+  .order-section {
+    width: 35%;
+  }
+  
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .checkout-container {
+      flex-direction: column;
+    }
+  
+    .address-section, .order-section {
+      width: 100%;
+    }
+  }
+  

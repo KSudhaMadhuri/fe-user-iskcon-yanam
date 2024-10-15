@@ -55,7 +55,7 @@ const Cart = () => {
     const totalAmount = cart.reduce((acc, item) => {
       return acc + parseInt(item.bookPrice * item.qty)
     }, 0)
-    console.log(totalAmount);
+
 
     total += totalAmount
 
@@ -140,9 +140,9 @@ const Cart = () => {
                   <span class="font-semibold text-lg text-gray-700">Total Amount</span>
                   <span class="font-bold text-lg text-gray-700">₹{totalAmount + cart.length * 70 + cart.length * 15}</span>
                 </div>
-                <div class="mt-2">
+                <Link to="/order" class="mt-2">
                   <button className='w-full bg-orange-500 text-white h-[3rem] rounded text-lg font-semibold hover:bg-orange-700'>PLACE ORDER</button>
-                </div>
+                </Link>
 
                 <h5 className='text-md text-center mt-3 font-semibold'>or <Link to="/" className='text-blue-700 font-medium'>Continue Shopping</Link></h5>
               </div>
