@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
     <footer className="text-white-600 body-font text-white bg-black">
     <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
       <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-        <Link to="/" className="flex title-font font-medium items-center md:justify-start justify-center text-white-900">
+        <Link to="/" className="flex title-font font-medium items-center md:justify-start justify-center text-white">
           <img src="/iskcon_logo.jpg" className='w-16 h-16 text-white   rounded' alt="logo" />
           <span className="ml-3 text-xl">   ISKCON YANAM STORES</span>
         </Link>
@@ -15,95 +16,65 @@ const Footer = () => {
       </div>
       <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-white-900 tracking-widest text-sm mb-3">
-            CATEGORIES
+          <h2 className="title-font font-medium text-orange-600 tracking-widest text-sm mb-3">
+            ABOUT
           </h2>
           <nav className="list-none mb-10">
             <li>
-              <a className="text-white-600 hover:text-white-800">First Link</a>
+              <a className="text-white-600 hover:text-white-800">About Srila Prabhupada</a>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Second Link</a>
+              <a className="text-white-600 hover:text-white-800">About BBT</a>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Third Link</a>
+              <a className="text-white-600 hover:text-white-800">About ISKCON</a>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Fourth Link</a>
+              <a href='mailto:iskconyanamstores@gmail.com' className="text-white-600 hover:text-white-800">Contact</a>
             </li>
           </nav>
         </div>
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-white-900 tracking-widest text-sm mb-3">
-            CATEGORIES
+          <h2 className="title-font font-medium text-orange-600 tracking-widest text-sm mb-3">
+            BOOKS
           </h2>
           <nav className="list-none mb-10">
             <li>
-              <a className="text-white-600 hover:text-white-800">First Link</a>
+              <a className="text-white-600 hover:text-white-800">Books</a>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Second Link</a>
+              <a className="text-white-600 hover:text-white-800">eBooks and Audio Books</a>
             </li>
-            <li>
-              <a className="text-white-600 hover:text-white-800">Third Link</a>
-            </li>
-            <li>
-              <a className="text-white-600 hover:text-white-800">Fourth Link</a>
-            </li>
+           
           </nav>
         </div>
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-white-900 tracking-widest text-sm mb-3">
-            CATEGORIES
+          <h2 className="title-font font-medium text-orange-600 tracking-widest text-sm mb-3">
+            HELP
           </h2>
           <nav className="list-none mb-10">
             <li>
-              <a className="text-white-600 hover:text-white-800">First Link</a>
+              <a className="text-white-600 hover:text-white-800">FAQ</a>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Second Link</a>
+              <Link to="/contact" className="text-white-600 hover:text-white-800">Returns & Refunds</Link>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Third Link</a>
+              <a className="text-white-600 hover:text-white-800">Privacy Policy</a>
             </li>
             <li>
-              <a className="text-white-600 hover:text-white-800">Fourth Link</a>
+              <Link to="/contact" className="text-white-600 hover:text-white-800">Shipping & Delivery</Link>
             </li>
           </nav>
         </div>
-        <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-white-900 tracking-widest text-sm mb-3">
-            CATEGORIES
-          </h2>
-          <nav className="list-none mb-10">
-            <li>
-              <a className="text-white-600 hover:text-white-800">First Link</a>
-            </li>
-            <li>
-              <a className="text-white-600 hover:text-white-800">Second Link</a>
-            </li>
-            <li>
-              <a className="text-white-600 hover:text-white-800">Third Link</a>
-            </li>
-            <li>
-              <a className="text-white-600 hover:text-white-800">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
+        
       </div>
     </div>
     <div className="bg-white">
       <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
         <p className=" text-black text-sm text-center sm:text-left">
-          © 2020 Tailblocks —
-          <a
-            href="https://twitter.com/knyttneve"
-            rel="noopener noreferrer"
-            className=" text-black ml-1"
-            target="_blank"
-          >
-            @knyttneve
-          </a>
+        © 2024 ISKCON Yanam Stores. All rights reserved 
+          
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
           <a className=" text-black">
@@ -144,22 +115,9 @@ const Footer = () => {
               <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
             </svg>
           </a>
-          <a className="ml-3 text-black">
-            <svg
-              fill="currentColor"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0}
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="none"
-                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-              />
-              <circle cx={4} cy={4} r={2} stroke="none" />
-            </svg>
+          <a href="mailto:iskconyanamstores@gmail.com">
+
+          <MdEmail className='text-black ml-3 w-5 h-5' />
           </a>
         </span>
       </div>

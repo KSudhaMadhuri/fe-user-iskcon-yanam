@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { productsContext } from '../App'
 import { indianStates } from './states'
-import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
+import { FaCircleCheck } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
+
 
 const Order = () => {
   const api = import.meta.env.VITE_API;
@@ -12,6 +14,8 @@ const Order = () => {
   const [paymentImg, setPaymentImg] = useState("")
   const [file, setFile] = useState(null)
   const [uploadSpin, setUploadSpin] = useState(false)
+  const [orderSpin, setOrderSpin] = useState(false)
+  const [orderOk, setOrderOk] = useState(false)
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -24,7 +28,7 @@ const Order = () => {
     paymentScreenShot: "",
 
   });
-  console.log(data);
+
 
   // products handling function 
   useEffect(() => {
@@ -92,39 +96,82 @@ const Order = () => {
     }
   }
 
+  const emailData = {
+    to: `${data.email}, iskconyanamstores@gmail.com`,
+    subject: "ISKCON YANAM STORES Order Placed Successfully",
+    html: `
+      <h3>Dear ${data.fullName},</h3>
+      <p>Thank you for your order! Below are the details of your Shipping Address:</p>
+      <h4>Address Details:</h4>
+      <ul>
+        <li><strong>City :</strong> ${data.city}</li>
+        <li><strong>Phone :</strong> ${data.phone}</li>
+          <li><strong>Address :</strong> ${data.address} ${data.pin}</li>
+            <li><strong>State :</strong> ${data.state}</li>
+      </ul>
+      <h4>Payment Details</h4>
+      <img src="${paymentImg}" alt="paymentslip" style="width:200px; height:auto;" />
+        <h3><strong>Total Amount :</strong> ${totalAmount}</h3>
+          <li><strong>Total Items:</strong> ${cart.length}</li>
+      <p>If you have any questions, feel free to contact us at iskconyanamstores@gmail.com.</p>
+      <h3>Customer Information:</h3>
+      <ul>
+        <li><strong>Name :</strong> ${data.fullName}</li>
+        <li><strong>Email :</strong> ${data.email}</li>
+      </ul>
+      <p>Thank you for shopping with ISKCON YANAM STORES!</p>
+      <a href="https://iskconyanamstores.netlify.app">Continue Shopping</a>
+    `,
+  };
 
 
 
   // order function 
   const formFunc = async (e) => {
-
     e.preventDefault();
+    if (!paymentImg) {
+      toast.error("Please pay the total amount and upload the payment screenshot")
+    } else if (paymentImg) {
+      setOrderSpin(true)
 
+      try {
+        const response = await axios.post(`${api}/order/placeorder`, data);
+        if (response) {
+          // sending mail function
+          try {
+            const res = await axios.post(`${api}/mail/sendmail`, emailData);
+            if (res) {
+              setData({
+                fullName: "",
+                email: "",
+                phone: "",
+                address: "",
+                city: "",
+                state: "",
+                pin: "",
+                orderedBooks: [],
+                paymentScreenShot: "",
+              });
+              setPaymentImg("");
+              setCart([])
+              localStorage.removeItem("cart")
+              setOrderSpin(false)
+              setOrderOk(true)
+            }
+          } catch (error) {
+            console.log(error);
+            toast.error("Please try again");
+            setOrderSpin(false)
 
-    try {
-      const response = await axios.post(`${api}/book/createbooks`, data);
-      if (response) {
+          }
 
-        setData({
-          fullName: "",
-          email: "",
-          phone: "",
-          address: "",
-          city: "",
-          state: "",
-          pin: "",
-          orderedBooks: [],
-          paymentScreenShot: "",
-        });
-        setPaymentImg("");
-        toast.success("Product uploaded successfully");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Please try again");
+        setOrderSpin(false)
 
       }
-    } catch (error) {
-
-      console.log(error);
-      toast.success("Please try again");
-
     }
 
   };
@@ -140,7 +187,7 @@ const Order = () => {
       <ToastContainer position='top-center'
         theme='dark' />
       <div className="checkout-page mt-10 px-2  pt-10">
-        <form className="checkout-container  rounded bg-white " >
+        <form onSubmit={formFunc} className="checkout-container  rounded bg-white " >
           <div className="address-section  flex flex-wrap justify-between ">
             <div>
               <h2 className="font-bold text-orange-600 mb-3">
@@ -314,7 +361,7 @@ const Order = () => {
                   paymentImg ? <img
                     src={paymentImg}
                     alt="receipt"
-                    className="mt-5 h-52 w-52 rounded"
+                    className="mt-5 h-[21rem] w-52 rounded"
                   /> : <img
                     src="/qrcode.jpg"
                     alt="qr_code"
@@ -404,7 +451,7 @@ const Order = () => {
               ))}
             </div>
 
-            <button className="mt-4 mr-4 bg-orange-500 text-white w-full font-bold h-10 rounded"
+            <button type='submit' className="mt-4 mr-4 bg-orange-500 text-white w-full font-bold h-10 rounded"
             >
               PLACE ORDER
             </button>
@@ -412,6 +459,38 @@ const Order = () => {
         </form>
 
       </div>
+
+
+      {/* order  progress spinner  */}
+      {orderSpin && <div className='fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-gray-800 opacity-85'>
+
+        <div
+          className="border-t-4 border-solid rounded-full w-12 h-12 animate-spin"
+          style={{
+            borderWidth: '7px',
+            borderColor: 'white',
+            borderTopColor: 'blue',
+            borderStyle: 'solid',
+          }}
+        ></div>
+
+
+      </div>}
+
+
+      {/* order placed card  */}
+      {orderOk && <div className='px-5 fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-white text-black'>
+        <div className='text-center flex flex-col items-center justify-center'>
+          <FaCircleCheck size={150} className='text-green-500' />
+          <h2 className="text-black text-2xl mt-4">Order Placed Successfully!</h2>
+        <p className="text-black text-lg mt-2">
+          You will receive the order details in your email.
+        </p>
+        <Link to="/" className="text-blue-700 font-semibold">Continue Shopping</Link>
+        </div>
+
+      </div>}
+
     </>
   )
 }

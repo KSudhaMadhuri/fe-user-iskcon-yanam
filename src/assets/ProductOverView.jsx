@@ -98,9 +98,9 @@ const ProductOverView = () => {
                     </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
                       ADD TO CART
                     </button>}
-                    <button className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded-full">
+                    {/* <Link to="/order" onClick={() => addCartFunc(data._id)} className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded-full">
                       BUY NOW
-                    </button>
+                    </Link> */}
                   </div>
 
                 </>)}

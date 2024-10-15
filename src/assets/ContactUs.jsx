@@ -24,7 +24,7 @@ const ContactUs = () => {
     <h3>Customer message : ${message}</h3>`,
   };
   // sending mail function
-  const submitFunc = async (res) => {
+  const submitFunc = async () => {
     setSubmitSpin(true);
     try {
       const res = await axios.post(`${api}/mail/sendmail`, formData);
