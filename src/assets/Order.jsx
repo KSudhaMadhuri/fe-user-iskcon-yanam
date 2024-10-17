@@ -3,8 +3,9 @@ import { productsContext } from '../App'
 import { indianStates } from './states'
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
-import { FaCircleCheck } from 'react-icons/fa6'
+import { FaCircleCheck, FaDownload, FaDownLong } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+
 
 
 const Order = () => {
@@ -207,7 +208,7 @@ const Order = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                      required
+                        required
                         type="text"
                         name="fullName"
                         placeholder="Full Name"
@@ -228,7 +229,7 @@ const Order = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                         required
+                        required
                         type="text"
                         placeholder="Phone"
                         value={data.phone}
@@ -377,6 +378,8 @@ const Order = () => {
                     />
                   }
                 </div>
+                <a href="/qrcode.jpg" className='text-md font-semibold px-2 py-1 mt-3 flex items-center gap-2 rounded text-white bg-blue-600' download="/qrcode.jpg"><FaDownload/>Download QR Code</a>
+               
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
                   <span class="font-semibold text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
@@ -405,9 +408,9 @@ const Order = () => {
                   Uploading...
                 </button> : <label
                   htmlFor='file'
-                  className="mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center text-white w-36 h-10 rounded"
+                  className="mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center text-white w-[12rem] h-10 rounded"
                 >
-                  Upload
+                  Upload ScreenShot
                 </label>}
                 <input type="file" name='file' id='file' className='hidden' onChange={fileHandling} />
 
@@ -434,11 +437,11 @@ const Order = () => {
                     alt="Book 1"
                   />
                   <div>
-                    <p className="font-semibold w-full md:w-[10rem] overflow-x-auto">
-                      <span className="font-medium hidden  lg:block  text-black pl-1">
+                    <p className="font-semibold w-full md:w-[13rem] overflow-x-auto">
+                      <span className="font-medium hidden  lg:block  text-black  ">
                         {bookItem.bookName.substring(0, 20)}
                       </span>
-                      <span className="font-medium block lg:hidden  text-black pl-1">
+                      <span className="font-medium block lg:hidden  text-black  ">
                         {bookItem.bookName.substring(0, 12)}
                       </span>
                     </p>

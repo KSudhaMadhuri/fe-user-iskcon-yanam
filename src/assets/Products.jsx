@@ -10,16 +10,16 @@ const Products = () => {
             <div className='pb-4 flex gap-4 flex-nowrap overflow-x-auto mt-4 '>
 
                 {products.map((item) => (
-                    <div key={item.id} className=" border-2 rounded border-red-300 p-3 h-[20rem] w-72 hover:opacity-85">
+                    <div key={item.id} className=" border-2 rounded border-red-300 p-3 h-[20rem] w-[14rem] lg:w-[16rem] hover:opacity-85">
                         <Link to={`/${item._id}`} className=''>
                             <img
                                 src={item.bookImage}
                                 alt={item.bookName}
-                                className="rounded h-[16rem] w-[12rem]"
+                                className="rounded h-[16rem] w-[12rem] lg:w-[14.5rem]"
                             />
                         </Link>
 
-                        <div className="mt-2 flex justify-between  w-[12rem]">
+                        <div className="mt-2 flex justify-between  w-[12rem] lg:w-[14rem]">
                             <div className=''>
                                 <h3 className="text-sm text-gray-700">
 

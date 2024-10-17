@@ -93,9 +93,9 @@ const ProductOverView = () => {
 
                   <div className="flex gap-3 justify-start my-5">
 
-                    {cart.some((item) => item._id === data._id) ? <Link to="/cart" className=" bg-indigo-800 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                    {cart.some((item) => item._id === data._id) ? <Link to="/cart" className=" bg-indigo-800 w-[12rem] text-center font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
                       GO TO CART
-                    </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                    </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r w-[12rem] from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
                       ADD TO CART
                     </button>}
                     {/* <Link to="/order" onClick={() => addCartFunc(data._id)} className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded-full">
