@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
 import { FaCircleCheck, FaDownload, FaUpload } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
-
+import Tesseract from 'tesseract.js'
 
 
 const Order = () => {
@@ -19,6 +19,8 @@ const Order = () => {
   const [orderOk, setOrderOk] = useState(false)
   const [totalCharges, setTotalCharges] = useState("")
   const [itemsAmount, setItemsAmount] = useState("")
+  const [extractedAmount, setExtractedAmount] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -28,10 +30,11 @@ const Order = () => {
     state: "",
     pin: "",
     orderedBooks: [],
-    paymentScreenShot: "gf",
+    paymentScreenShot: "",
 
   });
 
+console.log(extractedAmount);
 
   // products handling function 
   useEffect(() => {
@@ -104,7 +107,7 @@ const Order = () => {
         setData((prevData) => ({ ...prevData, paymentScreenShot: response.data.secure_url }));
         setPaymentImg(response.data.secure_url);
         setUploadSpin(false)
-
+        scanScreenShot(response.data.secure_url)
       }
     } catch (error) {
       console.log(error);
@@ -113,7 +116,55 @@ const Order = () => {
 
     }
   }
+ 
+  
+  const scanScreenShot = async (slip) => {
+    console.log("Started scanning");
+  const  expectedName = "Transfer"
+    if (slip) {
+      try {
+        // Await the Tesseract OCR process
+        const { data: { text } } = await Tesseract.recognize(slip, 'eng', {
+         
+        });
+        // Parse the extracted text to find the name (e.g., "Ritwika's")
+        const foundName = parseNameFromText(text);
+        console.log("text :",foundName);
+        
+        // Compare the extracted name with the expected name (case-insensitive)
+        if (sanitizeName(foundName).includes(sanitizeName(expectedName))) {
+          setIsVerified(true);
+          toast.success("Payment screenshot is verifyed successfully");
+        } else {
+          setIsVerified(false);
+          toast.error("Please upload the correct payment screenshot");
+        }
+  
+      } catch (error) {
+        console.error('Error reading the image:', error);
+        toast.error("Please verify again an error occurred while processing the Screenshot.");
+      }
+    }
+  };
+  
+  // Helper function to parse the name from the extracted text
+  const parseNameFromText = (text) => {
+    console.log(text);
+    
+    // Use regex to find a pattern that matches a name (e.g., "Ritwika's")
+    const regex = /\b([A-Z][a-zA-Z']+)\b/g;  // Matches capitalized names, allowing apostrophes
+    const matches = text.match(regex);
+  
+    // Return the first valid name found or an empty string
+    return matches ? matches[2] : '';
+  };
+  // Helper function to sanitize names (removes numbers and special characters)
+  const sanitizeName = (name) => {
+    return name.toLowerCase().replace(/[^a-zA-Z ]/g, "");  // Keeping only letters and spaces
+  };
+  
 
+  
   const emailData = {
     to: `${data.email}, iskconyanamstores@gmail.com`,
     subject: "ISKCON YANAM STORES Order Placed Successfully",
@@ -186,9 +237,9 @@ const Order = () => {
   // order function 
   const formFunc = async (e) => {
     e.preventDefault();
-    if (!paymentImg) {
-      toast.error("Please pay the total amount and upload the payment screenshot")
-    } else if (paymentImg) {
+    if (!paymentImg || !isVerified) {
+      toast.error("Please pay the total amount and upload the proper payment screenshot")
+    } else if (paymentImg && isVerified) {
       setOrderSpin(true)
 
       try {
@@ -434,7 +485,8 @@ const Order = () => {
                     />
                   }
                 </div>
-                <a href="/qrcode.jpg" className='text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
+                {paymentImg ? <button type='button' onClick={()=>scanScreenShot(paymentImg)} className='text-md font-semibold h-[2.5rem] w-[10rem] mt-3 rounded-full text-white bg-green-600' >Verify Screenshot</button>: 
+                <a href="/qrcode.jpg" className='text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>}
 
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
