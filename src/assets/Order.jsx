@@ -3,7 +3,7 @@ import { productsContext } from '../App'
 import { indianStates } from './states'
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
-import { FaCircleCheck, FaDownload, FaDownLong } from 'react-icons/fa6'
+import { FaCircleCheck, FaDownload, FaUpload } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 
 
@@ -28,7 +28,7 @@ const Order = () => {
     state: "",
     pin: "",
     orderedBooks: [],
-    paymentScreenShot: "",
+    paymentScreenShot: "gf",
 
   });
 
@@ -124,13 +124,51 @@ const Order = () => {
       <ul>
         <li><strong>City :</strong> ${data.city}</li>
         <li><strong>Phone :</strong> ${data.phone}</li>
-          <li><strong>Address :</strong> ${data.address} ${data.pin}</li>
-            <li><strong>State :</strong> ${data.state}</li>
+        <li><strong>Address :</strong> ${data.address} ${data.pin}</li>
+        <li><strong>State :</strong> ${data.state}</li>
       </ul>
+  
+      <h4 style="font-weight: bold; margin-bottom: 4px;">
+        Product Details :
+      </h4>
+      <div style="width: 100%; border: 1px solid gray;">
+        ${cart.map(bookItem => `
+          <div key="${bookItem._id}" style="display: flex; gap: 12px; border-bottom: 2px solid gray; padding: 12px;">
+            <img
+              src="${bookItem.bookImage}"
+              style="height: 10rem; width: 9rem; border-radius: 8px;"
+              alt="Book"
+            />
+            <div style="padding-left:10px;">
+              <p style="font-weight: 600; width: 100%; overflow-x: auto;">
+                <span style="font-weight: 500; display: block; color: black;">
+                  ${bookItem.bookName.substring(0, 20)}
+                </span>
+              </p>
+              <p style="font-weight: 600;">
+                Price :
+                <span style="font-weight: 500; color: black; padding-left: 4px;">
+                  ₹${bookItem.bookPrice}
+                </span>
+              </p>
+              <p style="font-weight: 600;">
+                Quantity :
+                <span style="font-weight: 500; color: black; padding-left: 4px;">
+                  ${bookItem.qty}
+                </span>
+              </p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+  
       <h4>Payment Details</h4>
-      <img src="${paymentImg}" alt="paymentslip" style="width:200px; height:auto;" />
-        <h3><strong>Total Amount :</strong> ${totalAmount}</h3>
-          <li><strong>Total Items:</strong> ${cart.length}</li>
+      <img src="${paymentImg}" alt="paymentslip" style="width: 200px; height: auto;" />
+      <h3><strong>Total Amount :</strong> ₹${totalAmount}</h3>
+      <ul>
+        <li><strong>Total Items:</strong> ${cart.length}</li>
+      </ul>
+      
       <p>If you have any questions, feel free to contact us at iskconyanamstores@gmail.com.</p>
       <h3>Customer Information:</h3>
       <ul>
@@ -141,6 +179,7 @@ const Order = () => {
       <a href="https://iskconyanamstores.netlify.app">Continue Shopping</a>
     `,
   };
+
 
 
 
@@ -395,7 +434,7 @@ const Order = () => {
                     />
                   }
                 </div>
-                <a href="/qrcode.jpg" className='text-md font-semibold px-2 py-1 mt-3 flex items-center gap-2 rounded text-white bg-blue-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
+                <a href="/qrcode.jpg" className='text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
 
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
@@ -417,14 +456,14 @@ const Order = () => {
 
                 {uploadSpin ? <button
                   disabled
-                  className="mt-4  bg-indigo-600 font-semibold text-lg flex justify-center items-center text-white w-36 h-10 rounded"
+                  className="mt-4  bg-indigo-600 font-semibold text-lg flex justify-center items-center text-white w-36 h-10 rounded-full"
                 >
                   Uploading...
                 </button> : <label
                   htmlFor='file'
-                  className="mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center text-white w-[12rem] h-10 rounded"
+                  className="mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center gap-2 text-white w-[13rem] h-10 rounded-full"
                 >
-                  Upload ScreenShot
+                  <FaUpload size={16} /> Upload ScreenShot
                 </label>}
                 <input type="file" name='file' id='file' className='hidden' onChange={fileHandling} />
 
@@ -476,7 +515,7 @@ const Order = () => {
               ))}
             </div>
 
-            <button type='submit' className="mt-4 mr-4 bg-orange-500 text-white w-full font-bold h-10 rounded"
+            <button type='submit' className="mt-4 mr-4 bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
             >
               PLACE ORDER
             </button>
