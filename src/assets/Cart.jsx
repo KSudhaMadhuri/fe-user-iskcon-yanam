@@ -9,6 +9,12 @@ import { toast, ToastContainer } from 'react-toastify';
 const Cart = () => {
   const { cart, setCart } = useContext(productsContext)
   const [totalAmount, setTotalAmount] = useState("")
+  const [weightCharges, setWeightCharges] = useState("")
+  const [itemsAmount, setItemsAmount] = useState("")
+  const [gst, setGst] = useState("")
+   
+
+  console.log("total amount with gst and post charges 20% :", weightCharges);
 
   // remove item function 
   const removeItem = (itemId, itemName) => {
@@ -47,18 +53,30 @@ const Cart = () => {
     toast.success(`${productName} item quantity decreased by 1`);
   };
 
-  // total amount  caluculating function 
   useEffect(() => {
+    // total amount  caluculating function 
     let total = 0
-
     const totalAmount = cart.reduce((acc, item) => {
       return acc + parseInt(item.bookPrice * item.qty)
     }, 0)
 
-
     total += totalAmount
+    setItemsAmount(total)
 
-    setTotalAmount(total)
+    // caluculating total grams 
+    let totalGrams = 0
+    const totalBookGrams = cart.reduce((acc, item) => {
+      return acc + parseInt(item.bookWeight * item.qty)
+    }, 0)
+
+    totalGrams += totalBookGrams
+    const gramsAmount = totalGrams / 100
+    setWeightCharges(gramsAmount)
+    const amountWithGst = gramsAmount * 1.20
+    const gstMinusAmount = amountWithGst - gramsAmount
+    setGst(gstMinusAmount)
+    const totalAmountWithCharges = total + amountWithGst + 17 
+    setTotalAmount(totalAmountWithCharges)
 
   }, [cart])
 
@@ -121,23 +139,30 @@ const Cart = () => {
                 <h2 class="text-gray-700 font-bold text-lg mb-4">PRICE DETAILS</h2>
                 <div class="flex justify-between py-2 border-b">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
-                  <span class="font-semibold text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
+                  <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                 </div>
 
                 <div class="flex justify-between py-4 border-b">
-                  <span class="text-gray-900">Delivery Charges</span>
+                  <span class="text-gray-900">Book Weight Charges</span>
                   <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{`${cart.length * 70}`}</span>
+                    <span class="font-semibold text-gray-700">₹{weightCharges.toLocaleString("en-IN")}</span>
 
                   </div>
                 </div>
                 <div class="flex justify-between py-4 border-b">
-                  <span class="text-gray-900">Secured Packaging Fee</span>
-                  <span class="font-semibold text-gray-700">₹{`${cart.length * 15}`}</span>
+                  <span class="text-gray-900">20% GST Charges</span>
+                  <div class="flex items-center">
+                    <span class="font-semibold text-gray-700">₹{gst.toLocaleString("en-IN")}</span>
+
+                  </div>
+                </div>
+                <div class="flex justify-between py-4 border-b">
+                  <span class="text-gray-900">Register Post Charges</span>
+                  <span class="font-semibold text-gray-700">₹17</span>
                 </div>
                 <div class="flex justify-between py-4 border-t mt-4">
                   <span class="font-semibold text-lg text-gray-700">Total Amount</span>
-                  <span class="font-bold text-lg text-gray-700">₹{totalAmount + cart.length * 70 + cart.length * 15}</span>
+                  <span class="font-bold text-lg text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
                 </div>
                 <Link to="/order" class="mt-2">
                   <button className='w-full bg-orange-500 text-white h-[3rem] rounded text-lg font-semibold hover:bg-orange-700'>PLACE ORDER</button>
@@ -156,7 +181,7 @@ const Cart = () => {
         </div>}
       </section>
 
-      
+
     </>
   )
 }

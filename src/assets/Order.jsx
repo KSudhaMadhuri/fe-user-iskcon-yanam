@@ -17,6 +17,8 @@ const Order = () => {
   const [uploadSpin, setUploadSpin] = useState(false)
   const [orderSpin, setOrderSpin] = useState(false)
   const [orderOk, setOrderOk] = useState(false)
+  const [totalCharges, setTotalCharges] = useState("")
+  const [itemsAmount, setItemsAmount] = useState("")
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -53,7 +55,22 @@ const Order = () => {
       return acc + parseInt(item.bookPrice * item.qty)
     }, 0)
     total += totalAm
-    setTotalAmount(total)
+    setItemsAmount(total)
+
+    // caluculating total grams 
+    let totalGrams = 0
+    const totalBookGrams = cart.reduce((acc, item) => {
+      return acc + parseInt(item.bookWeight * item.qty)
+    }, 0)
+
+    totalGrams += totalBookGrams
+    const gramsAmount = totalGrams / 100
+    const amountWithGst = gramsAmount * 1.20
+    const totalAmountWithCharges = amountWithGst + total + 17
+    const charges = amountWithGst + 17
+    setTotalCharges(charges)
+    setTotalAmount(totalAmountWithCharges)
+
   }, [cart])
 
   // payment file handling function 
@@ -378,27 +395,24 @@ const Order = () => {
                     />
                   }
                 </div>
-                <a href="/qrcode.jpg" className='text-md font-semibold px-2 py-1 mt-3 flex items-center gap-2 rounded text-white bg-blue-600' download="/qrcode.jpg"><FaDownload/>Download QR Code</a>
-               
+                <a href="/qrcode.jpg" className='text-md font-semibold px-2 py-1 mt-3 flex items-center gap-2 rounded text-white bg-blue-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
+
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
-                  <span class="font-semibold text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
+                  <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                 </div>
 
                 <div class="flex justify-between py-4 border-b w-full px-5">
-                  <span class="text-gray-900">Delivery Charges</span>
+                  <span class="text-gray-900">Total Charges</span>
                   <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{`${cart.length * 70}`}</span>
+                    <span class="font-semibold text-gray-700">₹{totalCharges.toLocaleString("en-IN")}</span>
 
                   </div>
                 </div>
-                <div class="flex justify-between py-4 border-b w-full px-5">
-                  <span class="text-gray-900">Packaging Fee</span>
-                  <span class="font-semibold text-gray-700">₹{`${cart.length * 15}`}</span>
-                </div>
+
                 <h3 className="font-semibold mt-3 text-xl  ">
                   TOTAL COST :
-                  <span className="text-black pl-1">₹{totalAmount + cart.length * 70 + cart.length * 15}</span>
+                  <span className="text-black pl-1">₹{totalAmount.toLocaleString("en-IN")}</span>
                 </h3>
 
                 {uploadSpin ? <button
