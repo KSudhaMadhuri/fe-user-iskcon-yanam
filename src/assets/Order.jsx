@@ -19,8 +19,7 @@ const Order = () => {
   const [orderOk, setOrderOk] = useState(false)
   const [totalCharges, setTotalCharges] = useState("")
   const [itemsAmount, setItemsAmount] = useState("")
-  const [extractedAmount, setExtractedAmount] = useState('');
-  const [isVerified, setIsVerified] = useState(false);
+  const [deliveryOption, setDeliveryOption] = useState('');
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -34,7 +33,7 @@ const Order = () => {
 
   });
 
-console.log(extractedAmount);
+
 
   // products handling function 
   useEffect(() => {
@@ -107,7 +106,7 @@ console.log(extractedAmount);
         setData((prevData) => ({ ...prevData, paymentScreenShot: response.data.secure_url }));
         setPaymentImg(response.data.secure_url);
         setUploadSpin(false)
-        scanScreenShot(response.data.secure_url)
+        
       }
     } catch (error) {
       console.log(error);
@@ -116,55 +115,15 @@ console.log(extractedAmount);
 
     }
   }
- 
-  
-  const scanScreenShot = async (slip) => {
-    console.log("Started scanning");
-  const  expectedName = "Transfer"
-    if (slip) {
-      try {
-        // Await the Tesseract OCR process
-        const { data: { text } } = await Tesseract.recognize(slip, 'eng', {
-         
-        });
-        // Parse the extracted text to find the name (e.g., "Ritwika's")
-        const foundName = parseNameFromText(text);
-        console.log("text :",foundName);
-        
-        // Compare the extracted name with the expected name (case-insensitive)
-        if (sanitizeName(foundName).includes(sanitizeName(expectedName))) {
-          setIsVerified(true);
-          toast.success("Payment screenshot is verifyed successfully");
-        } else {
-          setIsVerified(false);
-          toast.error("Please upload the correct payment screenshot");
-        }
-  
-      } catch (error) {
-        console.error('Error reading the image:', error);
-        toast.error("Please verify again an error occurred while processing the Screenshot.");
-      }
-    }
-  };
-  
-  // Helper function to parse the name from the extracted text
-  const parseNameFromText = (text) => {
-    console.log(text);
-    
-    // Use regex to find a pattern that matches a name (e.g., "Ritwika's")
-    const regex = /\b([A-Z][a-zA-Z']+)\b/g;  // Matches capitalized names, allowing apostrophes
-    const matches = text.match(regex);
-  
-    // Return the first valid name found or an empty string
-    return matches ? matches[2] : '';
-  };
-  // Helper function to sanitize names (removes numbers and special characters)
-  const sanitizeName = (name) => {
-    return name.toLowerCase().replace(/[^a-zA-Z ]/g, "");  // Keeping only letters and spaces
-  };
-  
 
-  
+  // order mode radio input handling function 
+  const handleOptionChange = (event) => {
+    setDeliveryOption(event.target.value);
+    console.log(event.target.value);
+
+  };
+
+  const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
   const emailData = {
     to: `${data.email}, iskconyanamstores@gmail.com`,
     subject: "ISKCON YANAM STORES Order Placed Successfully",
@@ -215,9 +174,10 @@ console.log(extractedAmount);
   
       <h4>Payment Details</h4>
       <img src="${paymentImg}" alt="paymentslip" style="width: 200px; height: auto;" />
-      <h3><strong>Total Amount :</strong> ₹${totalAmount}</h3>
+      <h3><strong>Total Amount :</strong> ₹${totalAmountValue}</h3>
       <ul>
         <li><strong>Total Items:</strong> ${cart.length}</li>
+         <li><strong>Order Mode:</strong> ${deliveryOption}</li>
       </ul>
       
       <p>If you have any questions, feel free to contact us at iskconyanamstores@gmail.com.</p>
@@ -232,14 +192,15 @@ console.log(extractedAmount);
   };
 
 
+ 
 
 
   // order function 
   const formFunc = async (e) => {
     e.preventDefault();
-    if (!paymentImg || !isVerified) {
-      toast.error("Please pay the total amount and upload the proper payment screenshot")
-    } else if (paymentImg && isVerified) {
+    if (!paymentImg) {
+      toast.error("Please pay the total amount and upload payment screenshot")
+    } else if (paymentImg) {
       setOrderSpin(true)
 
       try {
@@ -298,9 +259,31 @@ console.log(extractedAmount);
         <form onSubmit={formFunc} className="checkout-container  rounded bg-white " >
           <div className="address-section  flex flex-wrap justify-between ">
             <div>
-              <h2 className="font-bold text-orange-600 mb-3">
+
+              <h2 className="font-bold text-orange-600 mb-2">
+                ORDER MODE
+              </h2>
+              <h5 className='font-semibold mb-2 mt-3'>How would you like to receive your books?</h5>
+              <div className='pb-3 flex items-center justify-between flex-wrap'>
+
+
+                <div className='flex items-center  gap-2'>
+
+                  <input required type="radio" onChange={handleOptionChange} id="takeaway" name="deliveryOption" className="form-radio  h-4 w-4 text-blue-600" value="takeaway" />
+                  <label for="takeaway" className='font-semibold text-gray-600 mb-[0.12rem]'>Take Away (Pickup)</label><br />
+                </div>
+                <div className='flex items-center gap-2'>
+                  <input required type="radio" onChange={handleOptionChange} id="delivery" name="deliveryOption" className="form-radio  h-4 w-4 text-blue-600" value="delivery" />
+                  <label for="delivery" className='font-semibold text-gray-600 mb-[0.12rem]'>Order Delivery</label><br />
+                </div>
+              </div>
+
+
+              <h2 className="font-bold text-orange-600 mt-2 mb-3">
                 PERSONAL DETAILS AND ADDRESS
               </h2>
+
+
               <div className="flex flex-col items-center justify-center pb-4">
 
 
@@ -485,8 +468,8 @@ console.log(extractedAmount);
                     />
                   }
                 </div>
-                {paymentImg ? <button type='button' onClick={()=>scanScreenShot(paymentImg)} className='text-md font-semibold h-[2.5rem] w-[10rem] mt-3 rounded-full text-white bg-green-600' >Verify Screenshot</button>: 
-                <a href="/qrcode.jpg" className='text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>}
+
+                <a href="/qrcode.jpg" className='text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
 
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
@@ -496,14 +479,14 @@ console.log(extractedAmount);
                 <div class="flex justify-between py-4 border-b w-full px-5">
                   <span class="text-gray-900">Total Charges</span>
                   <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{totalCharges.toLocaleString("en-IN")}</span>
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${totalCharges.toLocaleString("en-IN")}`}</span>
 
                   </div>
                 </div>
 
                 <h3 className="font-semibold mt-3 text-xl  ">
                   TOTAL COST :
-                  <span className="text-black pl-1">₹{totalAmount.toLocaleString("en-IN")}</span>
+                  <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                 </h3>
 
                 {uploadSpin ? <button

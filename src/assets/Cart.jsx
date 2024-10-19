@@ -14,7 +14,7 @@ const Cart = () => {
   const [gst, setGst] = useState("")
    
 
-  console.log("total amount with gst and post charges 20% :", weightCharges);
+ 
 
   // remove item function 
   const removeItem = (itemId, itemName) => {
