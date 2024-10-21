@@ -106,7 +106,7 @@ const Order = () => {
         setData((prevData) => ({ ...prevData, paymentScreenShot: response.data.secure_url }));
         setPaymentImg(response.data.secure_url);
         setUploadSpin(false)
-        
+
       }
     } catch (error) {
       console.log(error);
@@ -192,7 +192,7 @@ const Order = () => {
   };
 
 
- 
+
 
 
   // order function 
@@ -455,7 +455,7 @@ const Order = () => {
                 <h2 className="font-bold  text-orange-600">
                   PAYMENT UPI QR CODE
                 </h2>
-                <div className='h-[14.7rem] overflow-y-auto'>
+                <div className='h-[14.7rem] overflow-y-auto mb-1'>
                   {
                     paymentImg ? <img
                       src={paymentImg}
@@ -468,8 +468,10 @@ const Order = () => {
                     />
                   }
                 </div>
+                {!paymentImg &&
 
-                <a href="/qrcode.jpg" className='text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
+                  <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
+                }
 
                 <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
@@ -496,7 +498,7 @@ const Order = () => {
                   Uploading...
                 </button> : <label
                   htmlFor='file'
-                  className="mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center gap-2 text-white w-[13rem] h-10 rounded-full"
+                  className="  mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center gap-2 text-white w-[13rem] h-10 rounded-full"
                 >
                   <FaUpload size={16} /> Upload ScreenShot
                 </label>}
