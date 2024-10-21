@@ -5,8 +5,6 @@ import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
 import { FaCircleCheck, FaDownload, FaUpload } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
-import Tesseract from 'tesseract.js'
-
 
 const Order = () => {
   const api = import.meta.env.VITE_API;
@@ -32,8 +30,6 @@ const Order = () => {
     paymentScreenShot: "",
 
   });
-
-
 
   // products handling function 
   useEffect(() => {
@@ -72,7 +68,6 @@ const Order = () => {
     const charges = amountWithGst + 17
     setTotalCharges(charges)
     setTotalAmount(totalAmountWithCharges)
-
   }, [cart])
 
   // payment file handling function 
@@ -91,7 +86,6 @@ const Order = () => {
 
 
   const uploadImage = async () => {
-
     const formData = new FormData()
     formData.append("file", file)
     formData.append("upload_preset", "hi1ox6r7");
@@ -119,8 +113,6 @@ const Order = () => {
   // order mode radio input handling function 
   const handleOptionChange = (event) => {
     setDeliveryOption(event.target.value);
-    console.log(event.target.value);
-
   };
 
   const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
@@ -192,9 +184,6 @@ const Order = () => {
   };
 
 
-
-
-
   // order function 
   const formFunc = async (e) => {
     e.preventDefault();
@@ -231,7 +220,6 @@ const Order = () => {
             console.log(error);
             toast.error("Please try again");
             setOrderSpin(false)
-
           }
 
         }
@@ -242,14 +230,11 @@ const Order = () => {
 
       }
     }
-
   };
 
   useEffect(() => {
     document.title = "Payment and Shipping Address"
   }, [])
-
-
 
   return (
     <>
@@ -259,16 +244,12 @@ const Order = () => {
         <form onSubmit={formFunc} className="checkout-container  rounded bg-white " >
           <div className="address-section  flex flex-wrap justify-between ">
             <div>
-
               <h2 className="font-bold text-orange-600 mb-2">
                 ORDER MODE
               </h2>
               <h5 className='font-semibold mb-2 mt-3'>How would you like to receive your books?</h5>
               <div className='pb-3 flex items-center justify-between flex-wrap'>
-
-
                 <div className='flex items-center  gap-2'>
-
                   <input required type="radio" onChange={handleOptionChange} id="takeaway" name="deliveryOption" className="form-radio  h-4 w-4 text-blue-600" value="takeaway" />
                   <label for="takeaway" className='font-semibold text-gray-600 mb-[0.12rem]'>Take Away (Pickup)</label><br />
                 </div>
@@ -277,18 +258,11 @@ const Order = () => {
                   <label for="delivery" className='font-semibold text-gray-600 mb-[0.12rem]'>Order Delivery</label><br />
                 </div>
               </div>
-
-
               <h2 className="font-bold text-orange-600 mt-2 mb-3">
                 PERSONAL DETAILS AND ADDRESS
               </h2>
-
-
               <div className="flex flex-col items-center justify-center pb-4">
-
-
                 <div className=" grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-3">
-
                   <div className="sm:col-span-3">
                     <label
                       htmlFor="fullName"
