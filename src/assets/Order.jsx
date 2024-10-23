@@ -168,12 +168,22 @@ const Order = () => {
         <li><strong>Total Items:</strong> ${cart.length}</li>
          <li><strong>Order Mode:</strong> ${deliveryOption}</li>
       </ul>
-      <p>If you have any questions, feel free to contact us at iskconyanamstores@gmail.com.</p>
+
+<h3>IskconYanamStores Address:</h3>
+      <ul>
+      <li><strong>Mobile :</strong> <a href="tel:+918500961256"> +918500961256</a></li>
+      <li><strong>Address :</strong> Door No : 7-1-038,
+                    Pydikondala Street,
+                    YANAM, Puducherry 533464</li>
+        <li><strong>Email :</strong> iskconyanamstores@gmail.com</li>
+      </ul>
+
       <h3>Customer Information:</h3>
       <ul>
-        <li><strong>Name :</strong> ${data.fullName}</li>
-        <li><strong>Email :</strong> ${data.email}</li>
+      <li><strong>Name :</strong> ${data.fullName}</li>
+      <li><strong>Email :</strong> ${data.email}</li>
       </ul>
+      <p>If you have any questions, feel free to contact us at iskconyanamstores@gmail.com.</p>
       <p>Thank you for shopping with ISKCON YANAM STORES!</p>
       <a href="https://iskconyanamstores.netlify.app">Continue Shopping</a>
     `,
@@ -251,6 +261,12 @@ const Order = () => {
                   <label for="delivery" className='font-semibold text-gray-600 mb-[0.12rem]'>Order Delivery</label><br />
                 </div>
               </div>
+              {/* <div className='flex flex-wrap w-[40%] text-red-700'>
+                {deliveryOption === "takeaway" ? "Pickup address will be sent via email and can also be found on the Contact Us page of our website." : ""}
+
+              </div> */}
+
+
               <h2 className="font-bold text-orange-600 mt-2 mb-3">
                 PERSONAL DETAILS AND ADDRESS
               </h2>
