@@ -84,7 +84,7 @@ const ContactUs = () => {
               </a>
 
 
-              <div className="flex items-center gap-3">
+              <a href="https://maps.app.goo.gl/XYBA4iZCu7dXdNMP6" className="flex items-center gap-3">
                 <FaLocationDot className="h-6 w-6 text-blue-500" />
                 <div className="w-full">
                   <p className="text-lg font-medium">Address</p>
@@ -93,7 +93,7 @@ const ContactUs = () => {
                     Pydikondala Street,
                     YANAM, Puducherry 533464</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 

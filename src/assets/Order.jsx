@@ -30,7 +30,7 @@ const Order = () => {
     paymentScreenShot: "",
     orderMode: ""
   });
- 
+
 
   // products handling function 
   useEffect(() => {
@@ -187,6 +187,8 @@ const Order = () => {
                     Pydikondala Street,
                     YANAM, Puducherry 533464</li>
         <li><strong>Email :</strong> iskconyanamstores@gmail.com</li>
+        <li><strong>Google Map Location :</strong> <a href="https://maps.app.goo.gl/XYBA4iZCu7dXdNMP6">Location</a></li>
+      
       </ul>
 
       <h3>Customer Information:</h3>
