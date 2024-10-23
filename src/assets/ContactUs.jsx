@@ -66,7 +66,7 @@ const ContactUs = () => {
 
             <div className="space-y-4">
 
-              <a href="mailto:iskconyanamstores@gmail.com" className="flex items-center  space-x-3">
+              <a href="mailto:iskconyanamstores@gmail.com" className="flex items-center gap-3">
                 <MdMail className="h-6 w-6 text-blue-500" />
                 <div>
                   <p className="text-lg font-medium">Email Us</p>
@@ -75,7 +75,7 @@ const ContactUs = () => {
               </a>
 
 
-              <a href="tel:+918500961256" className="flex items-center space-x-3">
+              <a href="tel:+918500961256" className="flex items-center gap-3">
                 <FaPhoneAlt className="h-6 w-6 text-blue-500" />
                 <div>
                   <p className="text-lg font-medium">Phone Number</p>
@@ -84,9 +84,9 @@ const ContactUs = () => {
               </a>
 
 
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center gap-3">
                 <FaLocationDot className="h-6 w-6 text-blue-500" />
-                <div>
+                <div className="w-full">
                   <p className="text-lg font-medium">Address</p>
                   <p className="text-sm text-gray-600">
                     Door No : 7-1-038,
