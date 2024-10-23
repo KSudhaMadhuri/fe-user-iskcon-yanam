@@ -28,8 +28,9 @@ const Order = () => {
     pin: "",
     orderedBooks: [],
     paymentScreenShot: "",
-
+    orderMode: ""
   });
+ 
 
   // products handling function 
   useEffect(() => {
@@ -110,7 +111,17 @@ const Order = () => {
 
   // order mode radio input handling function 
   const handleOptionChange = (event) => {
-    setDeliveryOption(event.target.value);
+    const mode = event.target.value
+    setData((prevData) => ({
+      ...prevData, orderMode: mode
+    }))
+
+    setDeliveryOption(mode);
+    if (mode === "takeaway") {
+      toast("Pickup address will be sent via email and can also be found on the Contact Us page of our website")
+    } else {
+      toast("You Order will be delivered to your address")
+    }
   };
 
   const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
@@ -261,11 +272,6 @@ const Order = () => {
                   <label for="delivery" className='font-semibold text-gray-600 mb-[0.12rem]'>Order Delivery</label><br />
                 </div>
               </div>
-              {/* <div className='flex flex-wrap w-[40%] text-red-700'>
-                {deliveryOption === "takeaway" ? "Pickup address will be sent via email and can also be found on the Contact Us page of our website." : ""}
-
-              </div> */}
-
 
               <h2 className="font-bold text-orange-600 mt-2 mb-3">
                 PERSONAL DETAILS AND ADDRESS
