@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import { FaPhoneAlt, FaAddressCard } from "react-icons/fa";
+import { MdMail } from "react-icons/md";
+import { FaLocationDot, FaMapLocationDot } from "react-icons/fa6";
+
 
 const ContactUs = () => {
   const api = import.meta.env.VITE_API;
@@ -45,26 +49,63 @@ const ContactUs = () => {
   };
 
 
-  useEffect(()=>{
-document.title = "Contact Us for any delivery queries"
-  },[])
+  useEffect(() => {
+    document.title = "Contact Us for any delivery queries"
+  }, [])
 
   return (
     <>
       <ToastContainer position="top-center" theme="dark" />
 
-      <section className="text-gray-600 body-font relative">
-        <div className="container px-5 pt-24 pb-5 mx-auto">
-          <div className="flex flex-col text-center w-full mb-12">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-              Contact Us
-            </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              For any Product Delivery & Queries, feel free to reach out to us
-              here. We’re here to help!
-            </p>
+      <section className="text-gray-600 body-font relative flex justify-center pb-10 px-5 pt-24">
+        <div className="container flex flex-wrap justify-between ">
+
+
+          <div className="bg-white p-8 w-full lg:w-[30%] mx-auto rounded shadow-lg">
+            <h2 className="text-3xl font-semibold text-center mb-6">Contact Us</h2>
+
+            <div className="space-y-4">
+
+              <a href="mailto:iskconyanamstores@gmail.com" className="flex items-center  space-x-3">
+                <MdMail className="h-6 w-6 text-blue-500" />
+                <div>
+                  <p className="text-lg font-medium">Email Us</p>
+                  <p className="text-sm text-gray-600">iskconyanamstores@gmail.com</p>
+                </div>
+              </a>
+
+
+              <a href="tel:+918500961256" className="flex items-center space-x-3">
+                <FaPhoneAlt className="h-6 w-6 text-blue-500" />
+                <div>
+                  <p className="text-lg font-medium">Phone Number</p>
+                  <p className="text-sm text-gray-600">+918500961256</p>
+                </div>
+              </a>
+
+
+              <div className="flex items-center space-x-3">
+                <FaLocationDot className="h-6 w-6 text-blue-500" />
+                <div>
+                  <p className="text-lg font-medium">Address</p>
+                  <p className="text-sm text-gray-600">
+                    Door No : 7-1-038,
+                    Pydikondala Street,
+                    YANAM, Puducherry 533464</p>
+                </div>
+              </div>
+            </div>
           </div>
+
+
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
+            <div className="flex flex-col text-center mt-8 w-full mb-12">
+
+              <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+                For any Product Delivery & Queries, feel free to reach out to us
+                here. We’re here to help!
+              </p>
+            </div>
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
                 <div className="relative">
@@ -147,6 +188,9 @@ document.title = "Contact Us for any delivery queries"
         </div>
       </section>
 
+
+      <hr className="my-3" />
+
       <div className="max-w-3xl mx-auto p-4">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Frequently Asked Questions (FAQ)
@@ -164,9 +208,8 @@ document.title = "Contact Us for any delivery queries"
               <span>{activeIndex === 0 ? "-" : "+"}</span>
             </button>
             <div
-              className={`p-4 text-gray-700 ${
-                activeIndex === 0 ? "" : "hidden"
-              }`}
+              className={`p-4 text-gray-700 ${activeIndex === 0 ? "" : "hidden"
+                }`}
             >
               Once your order has been shipped, you will receive an email with
               your tracking number and a link to track your shipment.
@@ -185,9 +228,8 @@ document.title = "Contact Us for any delivery queries"
               <span>{activeIndex === 1 ? "-" : "+"}</span>
             </button>
             <div
-              className={`p-4 text-gray-700 ${
-                activeIndex === 1 ? "" : "hidden"
-              }`}
+              className={`p-4 text-gray-700 ${activeIndex === 1 ? "" : "hidden"
+                }`}
             >
               If your book arrives in less-than-perfect condition, please
               contact our customer support team within 7 days of receiving your
@@ -208,9 +250,8 @@ document.title = "Contact Us for any delivery queries"
               <span>{activeIndex === 2 ? "-" : "+"}</span>
             </button>
             <div
-              className={`p-4 text-gray-700 ${
-                activeIndex === 2 ? "" : "hidden"
-              }`}
+              className={`p-4 text-gray-700 ${activeIndex === 2 ? "" : "hidden"
+                }`}
             >
               Once dispatched, we are unable to make changes. Contact our
               support team as soon as possible if you need assistance.
@@ -229,9 +270,8 @@ document.title = "Contact Us for any delivery queries"
               <span>{activeIndex === 3 ? "-" : "+"}</span>
             </button>
             <div
-              className={`p-4 text-gray-700 ${
-                activeIndex === 3 ? "" : "hidden"
-              }`}
+              className={`p-4 text-gray-700 ${activeIndex === 3 ? "" : "hidden"
+                }`}
             >
               Thank you for your interest! Unfortunately, we currently do not
               offer international shipping. We appreciate your understanding!
@@ -250,9 +290,8 @@ document.title = "Contact Us for any delivery queries"
               <span>{activeIndex === 4 ? "-" : "+"}</span>
             </button>
             <div
-              className={`p-4 text-gray-700 ${
-                activeIndex === 4 ? "" : "hidden"
-              }`}
+              className={`p-4 text-gray-700 ${activeIndex === 4 ? "" : "hidden"
+                }`}
             >
               While we work with trusted carriers, sometimes delays may occur
               due to unforeseen circumstances. If your order is delayed beyond

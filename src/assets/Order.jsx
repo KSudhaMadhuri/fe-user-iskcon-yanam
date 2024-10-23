@@ -100,13 +100,11 @@ const Order = () => {
         setData((prevData) => ({ ...prevData, paymentScreenShot: response.data.secure_url }));
         setPaymentImg(response.data.secure_url);
         setUploadSpin(false)
-
       }
     } catch (error) {
       console.log(error);
       setUploadSpin(false)
       toast.error("please upload payment screenshot again")
-
     }
   }
 
@@ -129,7 +127,6 @@ const Order = () => {
         <li><strong>Address :</strong> ${data.address} ${data.pin}</li>
         <li><strong>State :</strong> ${data.state}</li>
       </ul>
-  
       <h4 style="font-weight: bold; margin-bottom: 4px;">
         Product Details :
       </h4>
@@ -171,7 +168,6 @@ const Order = () => {
         <li><strong>Total Items:</strong> ${cart.length}</li>
          <li><strong>Order Mode:</strong> ${deliveryOption}</li>
       </ul>
-      
       <p>If you have any questions, feel free to contact us at iskconyanamstores@gmail.com.</p>
       <h3>Customer Information:</h3>
       <ul>
@@ -191,7 +187,6 @@ const Order = () => {
       toast.error("Please pay the total amount and upload payment screenshot")
     } else if (paymentImg) {
       setOrderSpin(true)
-
       try {
         const response = await axios.post(`${api}/order/placeorder`, data);
         if (response) {
@@ -221,13 +216,11 @@ const Order = () => {
             toast.error("Please try again");
             setOrderSpin(false)
           }
-
         }
       } catch (error) {
         console.log(error);
         toast.error("Please try again");
         setOrderSpin(false)
-
       }
     }
   };
@@ -422,7 +415,6 @@ const Order = () => {
                   </div>
                 </div>
               </div>
-
             </div>
             <div className="address-selection sm:flex sm:flex-col w-full sm:w-auto  sm:justify-start ">
               <div className="flex flex-col items-center sm:text-center">
@@ -532,13 +524,11 @@ const Order = () => {
             </button>
           </div>
         </form>
-
       </div>
 
 
       {/* order  progress spinner  */}
       {orderSpin && <div className='fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-gray-800 opacity-85'>
-
         <div
           className="border-t-4 border-solid rounded-full w-12 h-12 animate-spin"
           style={{
@@ -548,10 +538,7 @@ const Order = () => {
             borderStyle: 'solid',
           }}
         ></div>
-
-
       </div>}
-
 
       {/* order placed card  */}
       {orderOk && <div className='px-5 fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-white text-black'>
