@@ -162,7 +162,7 @@ const Cart = () => {
                 </div> */}
                 <div class="flex justify-between py-4 border-t mt-4">
                   <span class="font-semibold text-lg text-gray-700">Total Amount</span>
-                  <span class="font-bold text-lg text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
+                  <span class="font-bold text-lg text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                 </div>
                 <Link to="/order" class="mt-2">
                   <button className='w-full bg-orange-500 text-white h-[3rem] rounded text-lg font-semibold hover:bg-orange-700'>PLACE ORDER</button>

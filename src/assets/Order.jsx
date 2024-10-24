@@ -15,7 +15,6 @@ const Order = () => {
   const [uploadSpin, setUploadSpin] = useState(false)
   const [orderSpin, setOrderSpin] = useState(false)
   const [orderOk, setOrderOk] = useState(false)
-  const [totalCharges, setTotalCharges] = useState("")
   const [itemsAmount, setItemsAmount] = useState("")
   const [weightCharges, setWeightCharges] = useState("")
   const [gst, setGst] = useState("")
@@ -67,11 +66,10 @@ const Order = () => {
     totalGrams += totalBookGrams
     const gramsAmount = totalGrams / 100
     setWeightCharges(gramsAmount)
-    const amountWithGst = gramsAmount * 1.20
-    setGst(amountWithGst - gramsAmount)
-    const totalAmountWithCharges = amountWithGst + total + 17 + 15
-    const charges = amountWithGst + 17
-    setTotalCharges(charges)
+    const postAndGrams = gramsAmount + 17
+    const amountWithGst = postAndGrams * 1.18
+    setGst(amountWithGst - postAndGrams)
+    const totalAmountWithCharges = total + amountWithGst + 16
     setTotalAmount(totalAmountWithCharges)
   }, [cart])
 
@@ -480,13 +478,6 @@ const Order = () => {
                   </div>
                 </div>
                 <div class="flex justify-between py-3 border-b w-full px-5">
-                  <span class="text-gray-900">GST 20%</span>
-                  <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${gst.toLocaleString("en-IN")}`}</span>
-
-                  </div>
-                </div>
-                <div class="flex justify-between py-3 border-b w-full px-5">
                   <span class="text-gray-900">Post Charges</span>
                   <div class="flex items-center">
                     <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "17"}</span>
@@ -494,9 +485,16 @@ const Order = () => {
                   </div>
                 </div>
                 <div class="flex justify-between py-3 border-b w-full px-5">
-                  <span class="text-gray-900">Cover Charges</span>
+                  <span class="text-gray-900">GST 18%</span>
                   <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" :"15"}</span>
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${gst.toLocaleString("en-IN")}`}</span>
+
+                  </div>
+                </div>
+                <div class="flex justify-between py-3 border-b w-full px-5">
+                  <span class="text-gray-900">Packaging Charges</span>
+                  <div class="flex items-center">
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" :"16"}</span>
 
                   </div>
                 </div>
