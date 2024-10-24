@@ -17,6 +17,8 @@ const Order = () => {
   const [orderOk, setOrderOk] = useState(false)
   const [totalCharges, setTotalCharges] = useState("")
   const [itemsAmount, setItemsAmount] = useState("")
+  const [weightCharges, setWeightCharges] = useState("")
+  const [gst, setGst] = useState("")
   const [deliveryOption, setDeliveryOption] = useState('');
   const [data, setData] = useState({
     fullName: "",
@@ -64,8 +66,10 @@ const Order = () => {
 
     totalGrams += totalBookGrams
     const gramsAmount = totalGrams / 100
+    setWeightCharges(gramsAmount)
     const amountWithGst = gramsAmount * 1.20
-    const totalAmountWithCharges = amountWithGst + total + 17
+    setGst(amountWithGst - gramsAmount)
+    const totalAmountWithCharges = amountWithGst + total + 17 + 15
     const charges = amountWithGst + 17
     setTotalCharges(charges)
     setTotalAmount(totalAmountWithCharges)
@@ -468,14 +472,34 @@ const Order = () => {
                   <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                 </div>
 
-                <div class="flex justify-between py-4 border-b w-full px-5">
-                  <span class="text-gray-900">Total Charges</span>
+                <div class="flex justify-between py-3 border-b w-full px-5">
+                  <span class="text-gray-900">Weight Charges</span>
                   <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${totalCharges.toLocaleString("en-IN")}`}</span>
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${weightCharges.toLocaleString("en-IN")}`}</span>
 
                   </div>
                 </div>
+                <div class="flex justify-between py-3 border-b w-full px-5">
+                  <span class="text-gray-900">GST 20%</span>
+                  <div class="flex items-center">
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${gst.toLocaleString("en-IN")}`}</span>
 
+                  </div>
+                </div>
+                <div class="flex justify-between py-3 border-b w-full px-5">
+                  <span class="text-gray-900">Post Charges</span>
+                  <div class="flex items-center">
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "17"}</span>
+
+                  </div>
+                </div>
+                <div class="flex justify-between py-3 border-b w-full px-5">
+                  <span class="text-gray-900">Cover Charges</span>
+                  <div class="flex items-center">
+                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" :"15"}</span>
+
+                  </div>
+                </div>
                 <h3 className="font-semibold mt-3 text-xl  ">
                   TOTAL COST :
                   <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>

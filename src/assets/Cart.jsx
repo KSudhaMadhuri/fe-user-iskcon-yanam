@@ -142,7 +142,7 @@ const Cart = () => {
                   <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                 </div>
 
-                <div class="flex justify-between py-4 border-b">
+                {/* <div class="flex justify-between py-4 border-b">
                   <span class="text-gray-900">Book Weight Charges</span>
                   <div class="flex items-center">
                     <span class="font-semibold text-gray-700">₹{weightCharges.toLocaleString("en-IN")}</span>
@@ -159,7 +159,7 @@ const Cart = () => {
                 <div class="flex justify-between py-4 border-b">
                   <span class="text-gray-900">Register Post Charges</span>
                   <span class="font-semibold text-gray-700">₹17</span>
-                </div>
+                </div> */}
                 <div class="flex justify-between py-4 border-t mt-4">
                   <span class="font-semibold text-lg text-gray-700">Total Amount</span>
                   <span class="font-bold text-lg text-gray-700">₹{totalAmount.toLocaleString("en-IN")}</span>
