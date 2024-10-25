@@ -33,8 +33,8 @@ const Search = () => {
       <div className='flex justify-center pt-5 mb-7'>
         <div className='relative w-full sm:w-auto'>
 
-          <input ref={searchRef} value={text} onChange={changeHandling} placeholder="Search for books" type="text" name="text" id="text" className=' w-full h-[3rem] lg:w-96 rounded-full border-2  py-1.5 pl-12 pr-20 text-gray-900 outline-none border-orange-600 placeholder:text-gray-800   sm:text-md sm:leading-6 placeholder="0.00' />
-          <span className='left-4 top-[0.9rem] absolute text-orange-600  text-gray-600'><FaSearch size={20} /></span>
+          <input ref={searchRef} value={text} onChange={changeHandling} placeholder="Search for products" type="text" name="text" id="text" className=' w-full h-[3rem] lg:w-96 rounded-full border-2  py-1.5 pl-12 pr-20 text-gray-900 outline-none border-orange-600 placeholder:text-gray-800   sm:text-md sm:leading-6 placeholder="0.00' />
+          <span className='left-4 top-[0.9rem] absolute text-orange-600'><FaSearch size={20} /></span>
         </div>
       </div>
 

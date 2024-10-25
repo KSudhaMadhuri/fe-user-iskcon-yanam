@@ -18,6 +18,9 @@ const Order = () => {
   const [itemsAmount, setItemsAmount] = useState("")
   const [weightCharges, setWeightCharges] = useState("")
   const [gst, setGst] = useState("")
+  const [otherWeightCharges, setOtherWeightCharges] = useState("")
+  const [otherGst, setOtherGst] = useState("")
+  const [otherTotalAmount, setOtherTotalAmount] = useState("")
   const [deliveryOption, setDeliveryOption] = useState('');
   const [data, setData] = useState({
     fullName: "",
@@ -70,7 +73,34 @@ const Order = () => {
     const amountWithGst = postAndGrams * 1.18
     setGst(amountWithGst - postAndGrams)
     const totalAmountWithCharges = total + amountWithGst + 16
-    setTotalAmount(totalAmountWithCharges)
+
+    // calculating for book and other items charges 
+    const baseGrams = 500
+    const basePirce = 19
+    const postCharges = 17
+    const coverCharges = 16
+    const extraCharges = 16
+
+    const removedGrams = totalGrams > baseGrams ? totalGrams - basePirce : false
+    const remGrams = removedGrams === false ? 1 : removedGrams / 500
+    const roundNum = remGrams <= 1 ? 1 : remGrams
+    const roundedNumber = Math.ceil(roundNum);
+    const multipleAmount = roundedNumber === 1 ? false : roundedNumber * extraCharges
+    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + basePirce + postCharges
+    setOtherWeightCharges((multipleAmount + basePirce).toFixed(2))
+    const withGst = addingAllPrices * 1.18
+    const showGst = withGst - addingAllPrices
+    setOtherGst(showGst.toFixed(2))
+    const finalAmount = (total + withGst + coverCharges).toFixed(2)
+    const itemType = cart.some((item) => item.itemType === "other")
+
+    if (itemType === true) {
+      setTotalAmount(finalAmount)
+    } else if (itemType === false) {
+      setTotalAmount(totalAmountWithCharges)
+    }
+
+
   }, [cart])
 
   // payment file handling function 
@@ -464,44 +494,88 @@ const Order = () => {
 
                   <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
                 }
+                {/* both book and other items charges section  */}
+                {cart.some((item) => item.itemType === "other") ? <>
 
-                <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
+                  <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
+                    <span class="text-gray-900">Price ({cart.length} items)</span>
+                    <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
+                  </div>
+
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">Weight Charges</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${otherWeightCharges.toLocaleString("en-IN")}`}</span>
+
+                    </div>
+                  </div>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">Post Charges</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "17"}</span>
+
+                    </div>
+                  </div>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">GST 18%</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${otherGst.toLocaleString("en-IN")}`}</span>
+
+                    </div>
+                  </div>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">Packaging Charges</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "16"}</span>
+
+                    </div>
+                  </div>
+                  <h3 className="font-semibold mt-3 text-xl  ">
+                    TOTAL COST :
+                    <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
+                  </h3>
+
+                  {/* only book item charges section */}
+
+                </> : <><div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
                   <span class="text-gray-900">Price ({cart.length} items)</span>
                   <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                 </div>
 
-                <div class="flex justify-between py-3 border-b w-full px-5">
-                  <span class="text-gray-900">Weight Charges</span>
-                  <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${weightCharges.toLocaleString("en-IN")}`}</span>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">Weight Charges</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${weightCharges.toLocaleString("en-IN")}`}</span>
 
+                    </div>
                   </div>
-                </div>
-                <div class="flex justify-between py-3 border-b w-full px-5">
-                  <span class="text-gray-900">Post Charges</span>
-                  <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "17"}</span>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">Post Charges</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "17"}</span>
 
+                    </div>
                   </div>
-                </div>
-                <div class="flex justify-between py-3 border-b w-full px-5">
-                  <span class="text-gray-900">GST 18%</span>
-                  <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${gst.toLocaleString("en-IN")}`}</span>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">GST 18%</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : `${gst.toLocaleString("en-IN")}`}</span>
 
+                    </div>
                   </div>
-                </div>
-                <div class="flex justify-between py-3 border-b w-full px-5">
-                  <span class="text-gray-900">Packaging Charges</span>
-                  <div class="flex items-center">
-                    <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" :"16"}</span>
+                  <div class="flex justify-between py-3 border-b w-full px-5">
+                    <span class="text-gray-900">Packaging Charges</span>
+                    <div class="flex items-center">
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "16"}</span>
 
+                    </div>
                   </div>
-                </div>
-                <h3 className="font-semibold mt-3 text-xl  ">
-                  TOTAL COST :
-                  <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
-                </h3>
+                  <h3 className="font-semibold mt-3 text-xl  ">
+                    TOTAL COST :
+                    <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
+                  </h3>
+                </>
+                }
 
                 {uploadSpin ? <button
                   disabled
@@ -510,7 +584,7 @@ const Order = () => {
                   Uploading...
                 </button> : <label
                   htmlFor='file'
-                  className="  mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center gap-2 text-white w-[13rem] h-10 rounded-full"
+                  className="mt-4 cursor-pointer bg-indigo-600 font-semibold text-lg flex justify-center items-center gap-2 text-white w-[13rem] h-10 rounded-full"
                 >
                   <FaUpload size={16} /> Upload ScreenShot
                 </label>}

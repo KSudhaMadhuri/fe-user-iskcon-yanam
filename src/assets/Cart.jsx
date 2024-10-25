@@ -12,9 +12,9 @@ const Cart = () => {
   const [weightCharges, setWeightCharges] = useState("")
   const [itemsAmount, setItemsAmount] = useState("")
   const [gst, setGst] = useState("")
-   
 
- 
+
+
 
   // remove item function 
   const removeItem = (itemId, itemName) => {
@@ -75,7 +75,7 @@ const Cart = () => {
     const amountWithGst = gramsAmount * 1.20
     const gstMinusAmount = amountWithGst - gramsAmount
     setGst(gstMinusAmount)
-    const totalAmountWithCharges = total + amountWithGst + 17 
+    const totalAmountWithCharges = total + amountWithGst + 17
     setTotalAmount(totalAmountWithCharges)
 
   }, [cart])
@@ -99,8 +99,13 @@ const Cart = () => {
 
                   <div className='flex flex-col items-start'>
                     <Link to={`/${item._id}`} className="flex gap-1 mb-3 justify-start  items-start ">
-                      <span className='hidden lg:block  text-sm lg:text-xl font-semibold'>Book Name : {item.bookName.substring(0, 25)}...</span>
 
+                      {
+                        item.itemType === "other" ?
+                          <span className='hidden lg:block  text-sm lg:text-xl font-semibold'>{item.bookName.substring(0, 25)}...</span>
+                          :
+                          <span className='hidden lg:block  text-sm lg:text-xl font-semibold'>Book Name : {item.bookName.substring(0, 25)}...</span>
+                      }
                       <span className='block lg:hidden text-sm  font-semibold'>{item.bookName.substring(0, 15)}...</span>
                     </Link>
                     <div className='items-center mt-2 flex gap-2'>
@@ -118,7 +123,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <h6 className="mt-3 title-font font-medium text-2xl text-gray-900">
-                      ₹{(item.bookPrice * item.qty).toFixed(2).toLocaleString("en-IN")}
+                      ₹{(item.bookPrice * item.qty).toLocaleString("en-IN")}
                     </h6>
 
                     <button onClick={() => removeItem(item._id, item.bookName)} className="font-semibold border-2 p-1 bg-red-600 rounded-full  hover:text-white border-none w-32 text-center text-white mt-4">

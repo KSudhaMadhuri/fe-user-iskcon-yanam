@@ -76,16 +76,18 @@ const ProductOverView = () => {
 
                 </h2>
                 <div className="flex gap-1 mb-3 justify-start  items-start ">
-                  <span className='font-semibold text-nowrap'>Book Name : </span>
+                  {data.itemType === "book" && <span className='font-semibold text-nowrap'>Book Name : </span>}
                   <span className='text-xl font-semibold'>{data.bookName}</span>
                 </div>
-                <div className="flex gap-1 mb-3 items-start">
-                  <span className='font-semibold text-nowrap'>Book Author : </span>
-                  <span className='text-lg'>{data.bookAuthor}</span>
-                </div>
 
+                {data.itemType === "book" &&
+                  <div className="flex gap-1 mb-3 items-start">
+                    <span className='font-semibold text-nowrap'>Book Author : </span>
+                    <span className='text-lg'>{data.bookAuthor}</span>
+                  </div>
+                }
                 <div className="flex gap-1 mb-4 items-center">
-                  <span className='font-semibold text-nowrap'>Book Price : </span>
+                  <span className='font-semibold text-nowrap'>{data.itemType === "other" ? "Price" : "Book Price"} : </span>
                   <span className='text-lg font-semibold text-black'>  ₹{data.bookPrice}</span>
                 </div>
 
@@ -114,23 +116,26 @@ const ProductOverView = () => {
                   <h4 className='font-semibold text-xl text-gray-900'>Product Details</h4>
                   <hr className='my-2 border-1 border-black' />
                   <div className="flex gap-1 mb-3 items-center">
-                    <span className='font-semibold text-nowrap'>Book Weight : </span>
+                    <span className='font-semibold text-nowrap'>{data.itemType === "other" ? "Weight" : "Book Weight"} : </span>
                     <span className='text-lg'>{data.bookWeight} grams</span>
                   </div>
-                  <div className="flex gap-1 mb-3 items-center">
-                    <span className='font-semibold text-nowrap'>Book Pages : </span>
-                    <span className='text-lg'>{data.bookPages}</span>
-                  </div>
-                  <div className="flex gap-1 mb-3 items-center">
-                    <span className='font-semibold text-nowrap'>Book Size : </span>
-                    <span className='text-lg'>{data.bookSize}</span>
-                  </div>
-                  <div className="flex flex-col gap-1 mb-3 items-start">
-                    <span className='font-semibold text-black text-lg text-nowrap'>Summary</span>
-                    <span className='text-lg'>{data.bookSummary}</span>
-                  </div>
+                  {data.itemType === "book" && <>
+                    <div className="flex gap-1 mb-3 items-center">
+                      <span className='font-semibold text-nowrap'>Book Pages : </span>
+                      <span className='text-lg'>{data.bookPages}</span>
+                    </div>
+                    <div className="flex gap-1 mb-3 items-center">
+                      <span className='font-semibold text-nowrap'>Book Size : </span>
+                      <span className='text-lg'>{data.bookSize}</span>
+                    </div>
+                  </>}
+                  {data.bookSummary !== "" &&
+                    <div className="flex flex-col gap-1 mb-3 items-start">
+                      <span className='font-semibold text-black text-lg text-nowrap'>Summary</span>
+                      <span className='text-lg'>{data.bookSummary}</span>
+                    </div>
+                  }
                 </div>
-
               </div>
 
 
