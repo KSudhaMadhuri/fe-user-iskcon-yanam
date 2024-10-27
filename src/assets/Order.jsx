@@ -58,7 +58,7 @@ const Order = () => {
       return acc + parseInt(item.bookPrice * item.qty)
     }, 0)
     total += totalAm
-    setItemsAmount(total)
+    setItemsAmount(total.toFixed(2))
 
     // caluculating total grams 
     let totalGrams = 0
@@ -68,10 +68,10 @@ const Order = () => {
 
     totalGrams += totalBookGrams
     const gramsAmount = totalGrams / 100
-    setWeightCharges(gramsAmount)
+    setWeightCharges(gramsAmount.toFixed(2))
     const postAndGrams = gramsAmount + 17
     const amountWithGst = postAndGrams * 1.18
-    setGst(amountWithGst - postAndGrams)
+    setGst((amountWithGst - postAndGrams).toFixed(2))
     const totalAmountWithCharges = total + amountWithGst + 16
 
     // calculating for book and other items charges 
@@ -97,7 +97,7 @@ const Order = () => {
     if (itemType === true) {
       setTotalAmount(finalAmount)
     } else if (itemType === false) {
-      setTotalAmount(totalAmountWithCharges)
+      setTotalAmount(totalAmountWithCharges.toFixed(2))
     }
 
 
