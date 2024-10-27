@@ -83,14 +83,25 @@ const {cart } = useContext(productsContext)
             <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
               <Link to="/" className="flex flex-shrink-0 items-center">
                 <img
-                  className="w-10 h-10 rounded mr-3"
+                  className="w-7 h-7 lg:w-10 lg:h-10 rounded mr-3"
                   src="/iskcon_logo.jpg"
                   alt="Iskcon_logo"
                 />
-                <h3 className="text-white font-semibold text-nowrap text-xl">
+                <h3 className="text-white font-semibold text-nowrap text-md lg:text-xl">
                   ISKCON YANAM STORES
                 </h3>
               </Link>
+              <Link
+              to="/cart"
+              className="flex relative items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+            >
+              <FaCartShopping size={20}/> 
+              <div className="bg-blue-900 absolute -top-1 left-[0.90rem]   h-[1.19rem] w-[1.19rem] rounded-full flex justify-center items-center">
+                      <h6 className="text-[0.8rem]">{cart.length}</h6>
+                    </div>
+             
+            </Link>
+              
               <div className="hidden md:ml-6 md:block">
                 <div className="flex space-x-4">
                   <Link
@@ -145,7 +156,7 @@ const {cart } = useContext(productsContext)
             >
               <FaHome /> Home
             </Link>
-            <Link
+            {/* <Link
               to="/cart"
               className="flex relative items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
             >
@@ -154,7 +165,7 @@ const {cart } = useContext(productsContext)
                       <h6 className="text-[0.8rem]">{cart.length}</h6>
                     </div>
               Cart
-            </Link>
+            </Link> */}
             <Link
               to="/search"
               className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white "
