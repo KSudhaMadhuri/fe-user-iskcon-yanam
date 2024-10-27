@@ -93,7 +93,7 @@ const {cart } = useContext(productsContext)
               </Link>
               <Link
               to="/cart"
-              className="flex relative items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+              className="flex relative lg:hidden items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
             >
               <FaCartShopping size={20}/> 
               <div className="bg-blue-900 absolute -top-1 left-[0.90rem]   h-[1.19rem] w-[1.19rem] rounded-full flex justify-center items-center">
