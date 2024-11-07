@@ -11,6 +11,7 @@ import axios from "axios";
 import ProductOverView from "./assets/ProductOverView";
 import "react-toastify/dist/ReactToastify.css";
 import Order from "./assets/Order";
+import Policies from "./assets/Policies";
 
 export const productsContext = createContext();
 
@@ -57,6 +58,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/:bookId" element={<ProductOverView />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/policies/:name" element={<Policies/>} />
         </Routes>
       </productsContext.Provider>
     </>

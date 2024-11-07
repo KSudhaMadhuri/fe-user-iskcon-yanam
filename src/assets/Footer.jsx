@@ -98,17 +98,14 @@ const Footer = () => {
               HELP
             </h2>
             <nav className="list-none mb-10">
-              <li>
-                <a className="text-white-600 hover:text-white-800">FAQ</a>
+            <li>
+                <Link to="/policies/terms" className="text-white-600 hover:text-white-800">Terms and Conditions</Link>
               </li>
               <li>
-                <Link to="/contact" className="text-white-600 hover:text-white-800">Returns & Refunds</Link>
+                <Link to='/policies/privacy' className="text-white-600 hover:text-white-800">Privacy Policy</Link>
               </li>
               <li>
-                <a className="text-white-600 hover:text-white-800">Privacy Policy</a>
-              </li>
-              <li>
-                <Link to="/contact" className="text-white-600 hover:text-white-800">Shipping & Delivery</Link>
+                <Link to="/policies/refund" className="text-white-600 hover:text-white-800">Refund and Cancellation</Link>
               </li>
             </nav>
           </div>
