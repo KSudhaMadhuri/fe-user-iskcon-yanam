@@ -91,6 +91,56 @@ const Policies = () => {
           </div>
         </div>
       </section>}
+      {name === "shipping" && <section>
+        <div className="max-w-2xl mx-auto px-6 py-10 bg-white shadow-lg rounded-lg">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Shipping and Delivery Policy</h1>
+      
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">1. Processing Time</h2>
+        <p className="text-gray-600 mt-2">
+          Orders are processed within <span className="font-medium">3-5 business days</span> after payment is confirmed. Orders placed on weekends or public holidays will be processed on the next working day.
+        </p>
+      </div>
+
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">2. Shipping Charges</h2>
+        <p className="text-gray-600 mt-2">
+          Shipping charges will be calculated at checkout based on the delivery location and order size. Any additional charges (e.g., for expedited shipping) will also be displayed at checkout.
+        </p>
+      </div>
+
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">3. Delivery Time</h2>
+        <p className="text-gray-600 mt-2">
+          Estimated delivery times are as follows:
+        </p>
+        <ul className="list-disc list-inside text-gray-600 mt-2 ml-4">
+          <li>Within India: 5-10 business days after dispatch.</li>
+        </ul>
+        <p className="text-gray-600 mt-2">
+          Delivery times are estimates and may vary due to unforeseen circumstances such as delays with courier services or customs processing.
+        </p>
+      </div>
+
+    
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">5. Order Tracking</h2>
+        <p className="text-gray-600 mt-2">
+          Once your order is shipped, a tracking link will be provided via email or SMS to help you monitor your shipment's progress.
+        </p>
+      </div>
+
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">6. Delivery Issues</h2>
+        <p className="text-gray-600 mt-2">
+          If your package is delayed or lost, please contact us at <span className="font-medium">+918500961256</span>. We will work with the courier service to resolve the issue.
+        </p>
+        <p className="text-gray-600 mt-2">
+          For undelivered orders due to incorrect address details provided by the customer, re-shipping charges may apply.
+        </p>
+      </div>
+    </div>
+      </section>}
 
     </div>
   );

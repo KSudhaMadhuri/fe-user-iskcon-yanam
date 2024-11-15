@@ -107,6 +107,10 @@ const Footer = () => {
               <li>
                 <Link to="/policies/refund" className="text-white-600 hover:text-white-800">Refund and Cancellation</Link>
               </li>
+              <li>
+                <Link to="/policies/shipping" className="text-white-600 hover:text-white-800">
+                  Shipping and Delivery Policy  </Link>
+              </li>
             </nav>
           </div>
           {/* <div className="lg:w-1/4 md:w-1/2 w-full px-4 text-center">
