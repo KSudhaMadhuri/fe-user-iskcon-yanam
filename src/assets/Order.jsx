@@ -308,20 +308,21 @@ const Order = () => {
   const formFunc = async (e) => {
     e.preventDefault()
     const isOk = confirm("Order will be placed, are you sure ?")
-    if(isOk){
-  setOrderSpin(true)
+    if (isOk) {
+      setOrderSpin(true)
 
-    try {
-      const response = await axios.post(`${api}/order/placeorder`, data);
-      if (response) {
-        // calling mail function
-        sendMailFunction()
+      try {
+        const response = await axios.post(`${api}/order/placeorder`, data);
+        if (response) {
+          // calling mail function
+          sendMailFunction()
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Please try again");
+        setOrderSpin(false)
       }
-    } catch (error) {
-      console.log(error);
-      toast.error("Please try again");
-      setOrderSpin(false)
-    }}
+    }
   }
 
   // mail sending 
@@ -433,7 +434,8 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
-                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will only be processed after the total amount has been paid in full. Kindly ensure payment is completed before placing your order to avoid any delays in processing.
+                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please upload the payment receipt to WhatsApp at <a href='https://wa.me/8500961256
+' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
 
                   </h5>
                   <button type='submit' className="mt-4 bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
@@ -479,9 +481,7 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
-                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will only be processed after the total amount has been paid in full. Kindly ensure payment is completed before placing your order to avoid any delays in processing.
 
-                  </h5>
                   <button type='submit' className="mt-4  bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
                   >
                     PLACE ORDER
