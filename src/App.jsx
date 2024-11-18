@@ -11,6 +11,8 @@ import axios from "axios";
 import ProductOverView from "./assets/ProductOverView";
 import "react-toastify/dist/ReactToastify.css";
 import Order from "./assets/Order";
+import Policies from "./assets/Policies";
+
 
 export const productsContext = createContext();
 
