@@ -92,13 +92,13 @@ const Cart = () => {
             <div className="-my-7 divide-y-2 divide-gray-100">
               {cart.map((item) => (
                 <div key={item.id} className="py-8 flex gap-x-6 flex-nowrap">
-                  <Link className='flex  ' to={`/${item._id}`} >
+                  <Link className='flex  ' to={`/product_over_view/${item._id}`} >
 
                     <img src={item.bookImage} alt={item.title} className='w-[9rem] h-[10rem]  lg:w-[15rem] lg:h-[16rem] rounded' />
                   </Link>
 
                   <div className='flex flex-col items-start'>
-                    <Link to={`/${item._id}`} className="flex gap-1 mb-3 justify-start  items-start ">
+                    <Link to={`/product_over_view/${item._id}`} className="flex gap-1 mb-3 justify-start  items-start ">
 
                       {
                         item.itemType === "other" ?

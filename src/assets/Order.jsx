@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { productsContext } from '../App'
-import { indianStates } from './states'
+
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
 import { FaCircleCheck, FaDownload, FaUpload } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+import ShippingAddressFprm from './ShippingAddressFprm'
 
 const Order = () => {
   const api = import.meta.env.VITE_API;
   const { cart, setCart } = useContext(productsContext)
   const [totalAmount, setTotalAmount] = useState("")
-  const [paymentImg, setPaymentImg] = useState("")
-  const [file, setFile] = useState(null)
-  const [uploadSpin, setUploadSpin] = useState(false)
+  // const [paymentImg, setPaymentImg] = useState("")
+  // const [file, setFile] = useState(null)
+  // const [uploadSpin, setUploadSpin] = useState(false)
   const [orderSpin, setOrderSpin] = useState(false)
   const [orderOk, setOrderOk] = useState(false)
   const [itemsAmount, setItemsAmount] = useState("")
@@ -20,7 +21,7 @@ const Order = () => {
   const [gst, setGst] = useState("")
   const [otherWeightCharges, setOtherWeightCharges] = useState("")
   const [otherGst, setOtherGst] = useState("")
-  const [otherTotalAmount, setOtherTotalAmount] = useState("")
+  const [payAmount, setPayAmount] = useState("")
   const [deliveryOption, setDeliveryOption] = useState('');
   const [data, setData] = useState({
     fullName: "",
@@ -31,9 +32,10 @@ const Order = () => {
     state: "",
     pin: "",
     orderedBooks: [],
-    paymentScreenShot: "",
+    paymentScreenShot: "0000",
     orderMode: ""
   });
+
 
 
   // products handling function 
@@ -61,7 +63,7 @@ const Order = () => {
     setItemsAmount(total.toFixed(2))
 
     // caluculating total grams 
-    let totalGrams = 0
+    let totalGrams = 30
     const totalBookGrams = cart.reduce((acc, item) => {
       return acc + parseInt(item.bookWeight * item.qty)
     }, 0)
@@ -74,6 +76,7 @@ const Order = () => {
     setGst((amountWithGst - postAndGrams).toFixed(2))
     const totalAmountWithCharges = total + amountWithGst + 16
 
+
     // calculating for book and other items charges 
     const baseGrams = 500
     const basePirce = 19
@@ -81,13 +84,14 @@ const Order = () => {
     const coverCharges = 16
     const extraCharges = 16
 
-    const removedGrams = totalGrams > baseGrams ? totalGrams - basePirce : false
+    const removedGrams = totalGrams > baseGrams ? totalGrams - baseGrams : false
     const remGrams = removedGrams === false ? 1 : removedGrams / 500
     const roundNum = remGrams <= 1 ? 1 : remGrams
     const roundedNumber = Math.ceil(roundNum);
-    const multipleAmount = roundedNumber === 1 ? false : roundedNumber * extraCharges
-    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + basePirce + postCharges
-    setOtherWeightCharges((multipleAmount + basePirce).toFixed(2))
+    const multipleAmount = roundedNumber === 1 ? 16 : roundedNumber * extraCharges
+    const addingAllPrices = totalGrams < baseGrams ? basePirce + postCharges : multipleAmount + basePirce + postCharges
+    const weCha = addingAllPrices - postCharges
+    setOtherWeightCharges(weCha.toFixed(2))
     const withGst = addingAllPrices * 1.18
     const showGst = withGst - addingAllPrices
     setOtherGst(showGst.toFixed(2))
@@ -100,46 +104,47 @@ const Order = () => {
       setTotalAmount(totalAmountWithCharges.toFixed(2))
     }
 
-
   }, [cart])
 
-  // payment file handling function 
-  const fileHandling = (event) => {
-    const file = event.target.files[0]
-    if (file) {
-      setFile(file)
-    }
-  }
-  // uploading image to cloudinary
-  useEffect(() => {
-    if (file) {
-      uploadImage()
-    }
-  }, [file])
+
+  // // payment file handling function 
+  // const fileHandling = (event) => {
+  //   const file = event.target.files[0]
+  //   if (file) {
+  //     setFile(file)
+  //   }
+  // }
+
+  // // uploading image to cloudinary
+  // useEffect(() => {
+  //   if (file) {
+  //     uploadImage()
+  //   }
+  // }, [file])
 
 
-  const uploadImage = async () => {
-    const formData = new FormData()
-    formData.append("file", file)
-    formData.append("upload_preset", "hi1ox6r7");
-    setUploadSpin(true)
-    try {
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME
-        }/image/upload`,
-        formData
-      );
-      if (response) {
-        setData((prevData) => ({ ...prevData, paymentScreenShot: response.data.secure_url }));
-        setPaymentImg(response.data.secure_url);
-        setUploadSpin(false)
-      }
-    } catch (error) {
-      console.log(error);
-      setUploadSpin(false)
-      toast.error("please upload payment screenshot again")
-    }
-  }
+  // const uploadImage = async () => {
+  //   const formData = new FormData()
+  //   formData.append("file", file)
+  //   formData.append("upload_preset", "hi1ox6r7");
+  //   setUploadSpin(true)
+  //   try {
+  //     const response = await axios.post(
+  //       `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME
+  //       }/image/upload`,
+  //       formData
+  //     );
+  //     if (response) {
+  //       setData((prevData) => ({ ...prevData, paymentScreenShot: response.data.secure_url }));
+  //       setPaymentImg(response.data.secure_url);
+  //       setUploadSpin(false)
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setUploadSpin(false)
+  //     toast.error("please upload payment screenshot again")
+  //   }
+  // }
 
   // order mode radio input handling function 
   const handleOptionChange = (event) => {
@@ -156,7 +161,29 @@ const Order = () => {
     }
   };
 
+  // razorepay script tag including dynamically in head tag 
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  //   script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  //   script.async = true;
+  //   document.body.appendChild(script);
+
+  //   return () => {
+  //     document.body.removeChild(script)
+  //   }
+
+  // }, []);
+
+
+  useEffect(() => {
+    const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
+    const amountInPaisa = totalAmountValue * 100
+    const exactAmountInPaisa = Math.round(amountInPaisa)
+    setPayAmount(exactAmountInPaisa)
+  }, [deliveryOption, cart])
+
   const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
+
   const emailData = {
     to: `${data.email}, iskconyanamstores@gmail.com`,
     subject: "ISKCON YANAM STORES Order Placed Successfully",
@@ -203,9 +230,7 @@ const Order = () => {
           </div>
         `).join('')}
       </div>
-  
       <h4>Payment Details</h4>
-      <img src="${paymentImg}" alt="paymentslip" style="width: 200px; height: auto;" />
       <h3><strong>Total Amount :</strong> ₹${totalAmountValue}</h3>
       <ul>
         <li><strong>Total Items:</strong> ${cart.length}</li>
@@ -220,7 +245,6 @@ const Order = () => {
                     YANAM, Puducherry 533464</li>
         <li><strong>Email :</strong> iskconyanamstores@gmail.com</li>
         <li><strong>Google Map Location :</strong> <a href="https://maps.app.goo.gl/XYBA4iZCu7dXdNMP6">Location</a></li>
-      
       </ul>
 
       <h3>Customer Information:</h3>
@@ -235,50 +259,100 @@ const Order = () => {
   };
 
 
-  // order function 
+  // // razorpay function 
+  // const formFunc = async (e) => {
+  //   e.preventDefault();
+  //   const options = {
+  //     key: import.meta.env.VITE_RAZOREPAY_API_KEY,
+  //     amount: payAmount,
+  //     currency: "INR",
+  //     // name: "Your Company Name",
+  //     // description: "Product Description",
+  //     handler: function (response) {
+
+  //       if (response) {
+  //         setData((prev) => ({
+  //           ...prev, paymentScreenShot: response.razorpay_payment_id
+  //         }))
+  //         setOrderSpin(true)
+
+  //       }
+  //     },
+  //     modal: {
+  //       ondismiss: function () {
+  //         toast.error("Payment was not completed. Please try again.");
+  //       },
+  //     },
+  //     prefill: {
+  //       name: data.fullName,
+  //       email: data.email,
+  //       contact: data.phone,
+  //     },
+
+  //   };
+
+  //   const razorpay = new window.Razorpay(options);
+  //   razorpay.open();
+
+  // };
+
+  // // useEffect to trigger placeOrdersFunc after paymentScreenShot is set
+  // useEffect(() => {
+  //   if (data.paymentScreenShot) {
+  //     placeOrdersFunc();
+  //   }
+  // }, [data.paymentScreenShot]);
+
+
+
+  // order placing function
   const formFunc = async (e) => {
-    e.preventDefault();
-    if (!paymentImg) {
-      toast.error("Please pay the total amount and upload payment screenshot")
-    } else if (paymentImg) {
-      setOrderSpin(true)
-      try {
-        const response = await axios.post(`${api}/order/placeorder`, data);
-        if (response) {
-          // sending mail function
-          try {
-            const res = await axios.post(`${api}/mail/sendmail`, emailData);
-            if (res) {
-              setData({
-                fullName: "",
-                email: "",
-                phone: "",
-                address: "",
-                city: "",
-                state: "",
-                pin: "",
-                orderedBooks: [],
-                paymentScreenShot: "",
-              });
-              setPaymentImg("");
-              setCart([])
-              localStorage.removeItem("cart")
-              setOrderSpin(false)
-              setOrderOk(true)
-            }
-          } catch (error) {
-            console.log(error);
-            toast.error("Please try again");
-            setOrderSpin(false)
-          }
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Please try again");
-        setOrderSpin(false)
+    e.preventDefault()
+    const isOk = confirm("Order will be placed, are you sure ?")
+    if(isOk){
+  setOrderSpin(true)
+
+    try {
+      const response = await axios.post(`${api}/order/placeorder`, data);
+      if (response) {
+        // calling mail function
+        sendMailFunction()
       }
+    } catch (error) {
+      console.log(error);
+      toast.error("Please try again");
+      setOrderSpin(false)
+    }}
+  }
+
+  // mail sending 
+  const sendMailFunction = async () => {
+    try {
+      const res = await axios.post(`${api}/mail/sendmail`, emailData);
+      if (res) {
+        setData({
+          fullName: "",
+          email: "",
+          phone: "",
+          address: "",
+          city: "",
+          state: "",
+          pin: "",
+          orderedBooks: [],
+          paymentScreenShot: "",
+        });
+
+        setCart([])
+        localStorage.removeItem("cart")
+        setOrderSpin(false)
+        setOrderOk(true)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Please try again");
+      setOrderSpin(false)
     }
-  };
+  }
 
   useEffect(() => {
     document.title = "Payment and Shipping Address"
@@ -290,214 +364,40 @@ const Order = () => {
         theme='dark' />
       <div className="checkout-page mt-10 px-2  pt-10">
         <form onSubmit={formFunc} className="checkout-container  rounded bg-white " >
-          <div className="address-section  flex flex-wrap justify-between ">
-            <div>
-              <h2 className="font-bold text-orange-600 mb-2">
-                ORDER MODE
-              </h2>
-              <h5 className='font-semibold mb-2 mt-3'>How would you like to receive your books?</h5>
-              <div className='pb-3 flex items-center justify-between flex-wrap'>
-                <div className='flex items-center  gap-2'>
-                  <input required type="radio" onChange={handleOptionChange} id="takeaway" name="deliveryOption" className="form-radio  h-4 w-4 text-blue-600" value="takeaway" />
-                  <label for="takeaway" className='font-semibold text-gray-600 mb-[0.12rem]'>Take Away (Pickup)</label><br />
-                </div>
-                <div className='flex items-center gap-2'>
-                  <input required type="radio" onChange={handleOptionChange} id="delivery" name="deliveryOption" className="form-radio  h-4 w-4 text-blue-600" value="delivery" />
-                  <label for="delivery" className='font-semibold text-gray-600 mb-[0.12rem]'>Order Delivery</label><br />
-                </div>
-              </div>
+          <div className="address-section order-2 flex flex-wrap lg:order-none justify-between ">
 
-              <h2 className="font-bold text-orange-600 mt-2 mb-3">
-                PERSONAL DETAILS AND ADDRESS
-              </h2>
-              <div className="flex flex-col items-center justify-center pb-4">
-                <div className=" grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-3">
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="fullName"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Full Name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        required
-                        type="text"
-                        name="fullName"
-                        placeholder="Full Name"
-                        value={data.fullName}
-                        onChange={handleInputChange}
-                        id="fullName"
-                        autoComplete="family-name"
-                        className="block pl-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Phone
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        required
-                        type="text"
-                        placeholder="Phone"
-                        value={data.phone}
-                        onChange={handleInputChange}
-                        name="phone"
-                        id="phone"
-                        autoComplete="phone"
-                        className="block pl-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Email address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="email"
-                        name="email"
-                        required
-                        placeholder="Email"
-                        value={data.email}
-                        onChange={handleInputChange}
-                        type="email"
-                        autoComplete="email"
-                        className="block pl-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                    <p className="mt-1 text-sm leading-6 text-gray-600">
-                      Use a permanent Email address you will receive order details to mail.
-                    </p>
-                  </div>
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="state"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      state
-                    </label>
-                    <div className="mt-2">
-                      <select
-                        id="state"
-                        name="state"
-                        required
-                        value={data.state}
-                        onChange={handleInputChange}
-                        autoComplete="state-name"
-                        className="block w-full pl-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                      >
-                        <option value="">Select a state</option>
-                        {indianStates.map((state) => (
-                          <option key={state.value} value={state.value}>
-                            {state.name}
-                          </option>
-                        ))}
-                      </select>
+            <ShippingAddressFprm
+              fullName={data.fullName}
+              email={data.email}
+              phone={data.phone}
+              address={data.address}
+              city={data.city}
+              state={data.state}
+              pin={data.pin}
+              handleInputChange={handleInputChange}
+              handleOptionChange={handleOptionChange} />
 
-                    </div>
-                  </div>
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="address"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="address"
-                        required
-                        placeholder="Address"
-                        value={data.address}
-                        onChange={handleInputChange}
-                        id="address"
-                        autoComplete="street-address"
-                        className="block pl-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-3 ">
-                    <label
-                      htmlFor="city"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      City
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="city"
-                        required
-                        placeholder="City"
-                        value={data.city}
-                        onChange={handleInputChange}
-                        id="city"
-                        autoComplete="address-level2"
-                        className="block pl-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="pin"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      ZIP / Postal code
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="pin"
-                        required
-                        placeholder="PIN"
-                        value={data.pin}
-                        onChange={handleInputChange}
-                        id="pin"
-                        autoComplete="postal-code"
-                        className="block pl-4 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="address-selection sm:flex sm:flex-col w-full sm:w-auto  sm:justify-start ">
-              <div className="flex flex-col items-center sm:text-center">
+            <div className="address-selection  sm:flex sm:flex-col w-full sm:w-auto  sm:justify-start ">
+              <div className="flex flex-col sm:w-[16rem] md:w-[17rem]  items-center sm:text-center">
                 <h2 className="font-bold  text-orange-600">
-                  PAYMENT UPI QR CODE
+                  PAYMENT DETAILS
                 </h2>
-                <div className='h-[14.7rem] overflow-y-auto mb-1'>
-                  {
-                    paymentImg ? <img
-                      src={paymentImg}
-                      alt="receipt"
-                      className="mt-5 h-auto w-52 rounded"
-                    /> : <img
-                      src="/qrcode.jpg"
-                      alt="qr_code"
-                      className="mt-5 h-52 w-52 rounded"
-                    />
-                  }
-                </div>
-                {!paymentImg &&
 
-                  <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-3 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
-                }
+
+                <img
+                  src="/qrcode.jpg"
+                  alt="qr_code"
+                  className="mt-5 h-52 w-52 rounded"
+                />
+
+                <h6 className='text-blue-600 font-semibold'>PAY TO THIS NUMBER</h6>
+                <span className='font-bold'>8500961256</span>
+                <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-6 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
+
                 {/* both book and other items charges section  */}
                 {cart.some((item) => item.itemType === "other") ? <>
 
-                  <div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
+                  <div class="flex justify-between  py-2 pt-4 border-b w-full px-5 ">
                     <span class="text-gray-900">Price ({cart.length} items)</span>
                     <span class="font-semibold text-gray-700">₹{itemsAmount.toLocaleString("en-IN")}</span>
                   </div>
@@ -534,7 +434,13 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
+                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will only be processed after the total amount has been paid in full. Kindly ensure payment is completed before placing your order to avoid any delays in processing.
 
+                  </h5>
+                  <button type='submit' className="mt-4 bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
+                  >
+                    PLACE ORDER
+                  </button>
                   {/* only book item charges section */}
 
                 </> : <><div class="flex justify-between py-2 pt-4 border-b w-full px-5 ">
@@ -574,10 +480,17 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
+                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will only be processed after the total amount has been paid in full. Kindly ensure payment is completed before placing your order to avoid any delays in processing.
+
+                  </h5>
+                  <button type='submit' className="mt-4  bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
+                  >
+                    PLACE ORDER
+                  </button>
                 </>
                 }
 
-                {uploadSpin ? <button
+                {/* {uploadSpin ? <button
                   disabled
                   className="mt-4  bg-indigo-600 font-semibold text-lg flex justify-center items-center text-white w-36 h-10 rounded-full"
                 >
@@ -592,12 +505,12 @@ const Order = () => {
 
                 <div class=" py-3 lg:w-56 px-5">
                   <span className="font-semibold mb-1 mt-2 text-red-600">Please pay the above total amount and upload the payment screenshot to proceed with your order.</span>
-                </div>
+                </div> */}
 
               </div>
             </div>
           </div>
-          <div className="order-section pb-3">
+          <div className="order-section order-1 lg:order-none pb-1">
             <h2 className="font-bold mb-4 text-orange-600">
               PRODUCT DETAILS
             </h2>
@@ -638,10 +551,7 @@ const Order = () => {
               ))}
             </div>
 
-            <button type='submit' className="mt-4 mr-4 bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
-            >
-              PLACE ORDER
-            </button>
+
           </div>
         </form>
       </div>

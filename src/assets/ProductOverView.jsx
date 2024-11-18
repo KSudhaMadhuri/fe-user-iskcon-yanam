@@ -5,6 +5,7 @@ import Products from './Products';
 import Footer from './Footer';
 import { productsContext } from '../App';
 import { toast, ToastContainer } from 'react-toastify';
+import { PiShareNetwork } from "react-icons/pi";
 
 const ProductOverView = () => {
   const api = import.meta.env.VITE_API;
@@ -14,6 +15,20 @@ const ProductOverView = () => {
   const [spin, setSpin] = useState(false)
   const { cart, products, setCart } = useContext(productsContext)
 
+
+  // share function 
+  const shareFunc = async () => {
+    try {
+      await navigator.share({
+        title: `Check out ${data.bookName} on ISKCON YNAM Stores!`,
+        text: `Hello! Welcome to ISKCON YNAM Stores! 🌸 Take a look at this product: "${data.bookName}"\n\nDescription: ${data.bookSummary}\nPrice: ₹${data.bookPrice}\n\nDiscover more by clicking the link below:`,
+        url: `https://iskconyanamstores.netlify.app/product_over_view/${bookId}`
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Please try again.");
+    }
+  };
 
 
 
@@ -59,17 +74,26 @@ const ProductOverView = () => {
       <ToastContainer position='bottom-center' theme='dark' />
       {spin ?
         <div className='mt-20 pt-20 flex justify-center items-center font-semibold text-xl ' style={{ height: "70vh" }}>
-          Loading...
+          <div
+          className="border-t-4 border-solid rounded-full w-9 h-9 animate-spin"
+          style={{
+            borderWidth: '5px',
+            borderColor: 'blue',
+            borderTopColor: 'white',
+            borderStyle: 'solid',
+          }}
+        ></div>
         </div> : <section className="text-gray-600 body-font overflow-hidden">
           <div className=" px-5 py-24 pb-8 mx-auto">
             <div className="flex flex-row gap-4  justify-betweeen w-full flex-wrap">
-              <div className=' w-full  h-auto flex justify-center sm:w-[40%]'>
+              <div className='relative w-full  h-auto flex justify-center sm:w-[40%]'>
 
                 <img
                   alt="ecommerce"
-                  className="w-full h-auto sm:h-[29rem] md:h-[28rem] lg:w-96 lg:h-[32rem] rounded "
+                  className=" w-full h-auto sm:h-[29rem] md:h-[28rem] lg:w-96 lg:h-[32rem] rounded "
                   src={data.bookImage}
                 />
+                <PiShareNetwork title='Share' onClick={shareFunc} className='absolute top-2 bg-black p-1 h-8 w-10 cursor-pointer  text-white rounded-full  right-2 lg:right-[4rem] ' />
               </div>
               <div className="w-full sm:w-1/2  mt-6 lg:mt-0">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">

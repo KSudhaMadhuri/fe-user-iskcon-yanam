@@ -45,7 +45,7 @@ const Home = () => {
               {products.map((item) => (
 
                 <div key={item.id} className="group border-2 rounded border-red-300 w-full sm:w-[12rem]  md:w-52   lg:w-72   p-3 relative  hover:opacity-85">
-                  <Link to={`/${item._id}`} className=''>
+                  <Link to={`/product_over_view/${item._id}`} className=''>
                     <img
                       src={item.bookImage}
                       alt={item.bookName}

@@ -11,7 +11,7 @@ const Products = () => {
 
                 {products.map((item) => (
                     <div key={item.id} className=" border-2 rounded border-red-300 p-3 h-[20rem] w-[14rem] lg:w-[16rem] hover:opacity-85">
-                        <Link to={`/${item._id}`} className=''>
+                        <Link to={`/product_over_view/${item._id}`} className=''>
                             <img
                                 src={item.bookImage}
                                 alt={item.bookName}
@@ -29,7 +29,7 @@ const Products = () => {
                             <p className="text-sm  font-medium text-nowrap text-gray-900">₹ {item.bookPrice}</p>
                         </div>
                     </div>
-                ))}
+                )).reverse()}
 
             </div>
         </div>

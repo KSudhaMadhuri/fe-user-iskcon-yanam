@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Footer from "./Footer";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { FaPhoneAlt, FaAddressCard } from "react-icons/fa";
 import { MdMail } from "react-icons/md";
 import { FaLocationDot, FaMapLocationDot } from "react-icons/fa6";
+import Footer from "./Footer";
 
 
 const ContactUs = () => {
@@ -29,6 +29,9 @@ const ContactUs = () => {
   };
   // sending mail function
   const submitFunc = async () => {
+    if(!name || !email || !message){
+      toast.error("Please Enter the Name, Email and Message")
+    }else{
     setSubmitSpin(true);
     try {
       const res = await axios.post(`${api}/mail/sendmail`, formData);
@@ -45,7 +48,7 @@ const ContactUs = () => {
       console.log(error);
       toast.error("Please try again");
       setSubmitSpin(false);
-    }
+    }}
   };
 
 
@@ -302,7 +305,7 @@ const ContactUs = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer/>
     </>
   );
 };

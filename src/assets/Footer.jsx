@@ -66,16 +66,17 @@ const Footer = () => {
             </h2>
             <nav className="list-none mb-10">
               <li>
-                <a className="text-white-600 hover:text-white-800">About Srila Prabhupada</a>
+                <a className="text-white-600 hover:text-white-800" href='https://en.wikipedia.org/wiki/A._C._Bhaktivedanta_Swami_Prabhupada'>About Swami Prabhupada</a>
+              </li>
+
+              <li>
+                <a className="text-white-600 hover:text-white-800" href='https://en.wikipedia.org/wiki/International_Society_for_Krishna_Consciousness#:~:text=ISKCON%20is%20%22the%20largest%20and,mid%20and%20late%2020th%20century.'>About ISKCON</a>
               </li>
               <li>
-                <a className="text-white-600 hover:text-white-800">About BBT</a>
-              </li>
-              <li>
-                <a className="text-white-600 hover:text-white-800">About ISKCON</a>
-              </li>
-              <li>
-                <a href='mailto:iskconyanamstores@gmail.com' className="text-white-600 hover:text-white-800">Contact</a>
+                <a href='mailto:iskconyanamstores@gmail.com' className="text-white-600 hover:text-white-800">Contact us</a>
+              </li><li>
+                <Link to="/contact" className="text-white-600 hover:text-white-800">Address</Link>
+
               </li>
             </nav>
           </div>
@@ -98,35 +99,22 @@ const Footer = () => {
               HELP
             </h2>
             <nav className="list-none mb-10">
+
               <li>
-                <a className="text-white-600 hover:text-white-800">FAQ</a>
+                <Link to="/policies/terms" className="text-white-600 hover:text-white-800">Terms and Conditions</Link>
               </li>
               <li>
-                <Link to="/contact" className="text-white-600 hover:text-white-800">Returns & Refunds</Link>
+                <Link to='/policies/privacy' className="text-white-600 hover:text-white-800">Privacy Policy</Link>
               </li>
               <li>
-                <a className="text-white-600 hover:text-white-800">Privacy Policy</a>
+                <Link to="/policies/refund" className="text-white-600 hover:text-white-800">Refund and Cancellation</Link>
               </li>
               <li>
-                <Link to="/contact" className="text-white-600 hover:text-white-800">Shipping & Delivery</Link>
+                <Link to="/policies/shipping" className="text-white-600 hover:text-white-800">
+                  Shipping and Delivery Policy  </Link>
               </li>
             </nav>
           </div>
-          {/* <div className="lg:w-1/4 md:w-1/2 w-full px-4 text-center">
-            <h2 className="title-font font-medium text-orange-600 tracking-widest text-sm mb-3">
-              Share App
-            </h2>
-            <nav className="list-none mb-10 flex justify-center">
-               
-
-                <button onClick={shareApp} className='bg-blue-600 text-white flex items-center justify-center gap-2 font-semibold h-8 rounded-full w-[10rem]'>
-
-                  <FaShareSquare className=' text-white' />Share App
-                </button>
-        
-
-            </nav>
-          </div> */}
 
 
         </div>
