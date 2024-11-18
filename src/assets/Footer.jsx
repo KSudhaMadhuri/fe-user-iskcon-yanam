@@ -99,9 +99,8 @@ const Footer = () => {
               HELP
             </h2>
             <nav className="list-none mb-10">
-
               <li>
-                <Link to="/policies/terms" className="text-white-600 hover:text-white-800">Terms and Conditions</Link>
+                <a className="text-white-600 hover:text-white-800">FAQ</a>
               </li>
               <li>
                 <Link to='/policies/privacy' className="text-white-600 hover:text-white-800">Privacy Policy</Link>

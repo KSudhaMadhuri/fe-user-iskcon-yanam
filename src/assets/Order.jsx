@@ -88,10 +88,9 @@ const Order = () => {
     const remGrams = removedGrams === false ? 1 : removedGrams / 500
     const roundNum = remGrams <= 1 ? 1 : remGrams
     const roundedNumber = Math.ceil(roundNum);
-    const multipleAmount = roundedNumber === 1 ? 16 : roundedNumber * extraCharges
-    const addingAllPrices = totalGrams < baseGrams ? basePirce + postCharges : multipleAmount + basePirce + postCharges
-    const weCha = addingAllPrices - postCharges
-    setOtherWeightCharges(weCha.toFixed(2))
+    const multipleAmount = roundedNumber === 1 ? false : roundedNumber * extraCharges
+    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + basePirce + postCharges
+    setOtherWeightCharges((multipleAmount + basePirce).toFixed(2))
     const withGst = addingAllPrices * 1.18
     const showGst = withGst - addingAllPrices
     setOtherGst(showGst.toFixed(2))

@@ -11,10 +11,6 @@ import axios from "axios";
 import ProductOverView from "./assets/ProductOverView";
 import "react-toastify/dist/ReactToastify.css";
 import Order from "./assets/Order";
-import PageNotFound from "./assets/PageNotFound";
-import Policies from "./assets/Policies";
-
-
 
 export const productsContext = createContext();
 
@@ -61,7 +57,6 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/product_over_view/:bookId" element={<ProductOverView />} />
           <Route path="/order" element={<Order />} />
-          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </productsContext.Provider>
     </>
