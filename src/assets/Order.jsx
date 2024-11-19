@@ -3,7 +3,7 @@ import { productsContext } from '../App'
 
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
-import { FaCircleCheck, FaDownload, FaUpload } from 'react-icons/fa6'
+import { FaCircleCheck, FaDownload, FaUpload, FaWhatsapp } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import ShippingAddressFprm from './ShippingAddressFprm'
 
@@ -385,15 +385,16 @@ const Order = () => {
                   PAYMENT DETAILS
                 </h2>
 
-
                 <img
                   src="/qrcode.jpg"
                   alt="qr_code"
-                  className="mt-5 h-52 w-52 rounded"
+                  className="border-2 my-2 h-52 w-52 rounded "
                 />
-
-                <h6 className='text-blue-600 font-semibold'>PAY TO THIS NUMBER</h6>
+                {/* <span className='font-bold mb-1'>OR</span> */}
+                <img src="/allpayments.png" className=' w-full' alt="all_upi_logo" />
+                <h6 className='text-blue-600 font-bold'>PAY TO THIS NUMBER</h6>
                 <span className='font-bold'>8500961256</span>
+
                 <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-6 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
 
                 {/* both book and other items charges section  */}
@@ -436,10 +437,11 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
-                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256
-' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
+                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to given below WhatsApp number on the same day of the order.
 
                   </h5>
+                  <a href='https://wa.me/918500961256' className='text-green-700 font-bold flex items-center gap-1 '> <FaWhatsapp size={21}/> 8500961256</a>
+
                   <button type='submit' className="mt-4 bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
                   >
                     PLACE ORDER
@@ -483,9 +485,10 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
-                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
+                  <h5 className='mt-2 '><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to given below WhatsApp number the same day of the order.
 
                   </h5>
+                  <a href='https://wa.me/918500961256' className='text-green-700 font-bold flex items-center gap-1 '> <FaWhatsapp size={21}/> 8500961256</a>
                   <button type='submit' className="mt-4  bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
                   >
                     PLACE ORDER
@@ -577,12 +580,12 @@ const Order = () => {
       {orderOk && <div className='px-5 fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-white text-black'>
         <div className='text-center flex flex-col items-center justify-center'>
           <FaCircleCheck size={150} className='text-green-500' />
-        <h4 className='mt-4 text-2xl font-semibold'>₹{totalAmountValue}</h4>
+          <h4 className='mt-4 text-2xl font-semibold'>₹{totalAmountValue}</h4>
           <h2 className="text-black text-2xl mt-1">Order Placed Successfully!</h2>
-          
+
           <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
 
-</h5>
+          </h5>
           <p className="text-black text-lg mt-2">
             You will receive the order details in your email.
           </p>

@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className="absolute inset-y-0 right-0 flex items-center md:hidden">
               <button
                 type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-white   hover:text-white focus:outline-none "
+                className="relative inline-flex items-center justify-center rounded-md p-2 text-white   hover:text-white focus:outline-none mr-1 "
                 aria-controls="mobile-menu"
                 aria-expanded={menuOpen}
                 onClick={toggleMenu}
@@ -96,7 +96,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/cart"
-                  className="flex relative ml-auto md:hidden lg:hidden items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white   hover:text-white"
+                  className="mr-2 flex relative ml-auto md:hidden lg:hidden items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-white   hover:text-white"
                 >
                   <FaCartShopping size={20} />
                   <div className="bg-blue-900 absolute -top-1 left-[0.90rem]   h-[1.19rem] w-[1.19rem] rounded-full flex justify-center items-center">

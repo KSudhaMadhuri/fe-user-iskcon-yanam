@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
-import { FaPhoneAlt, FaAddressCard } from "react-icons/fa";
+import { FaPhoneAlt, FaAddressCard, FaWhatsapp } from "react-icons/fa";
 import { MdMail } from "react-icons/md";
 import { FaLocationDot, FaMapLocationDot } from "react-icons/fa6";
 import Footer from "./Footer";
@@ -80,6 +80,13 @@ const ContactUs = () => {
 
               <a href="tel:+918500961256" className="flex items-center gap-3">
                 <FaPhoneAlt className="h-6 w-6 text-blue-500" />
+                <div>
+                  <p className="text-lg font-medium">Phone Number</p>
+                  <p className="text-sm text-gray-600">+918500961256</p>
+                </div>
+              </a>
+              <a href="https://wa.me/918500961256" className="flex items-center gap-3">
+                <FaWhatsapp className="h-6 w-6 font-bold text-green-500" />
                 <div>
                   <p className="text-lg font-medium">Phone Number</p>
                   <p className="text-sm text-gray-600">+918500961256</p>
