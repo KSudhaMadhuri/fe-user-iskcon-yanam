@@ -11,6 +11,7 @@ const Order = () => {
   const api = import.meta.env.VITE_API;
   const { cart, setCart } = useContext(productsContext)
   const [totalAmount, setTotalAmount] = useState("")
+  const [amountInSuccess, setAmountInSuccess] = useState("")
   // const [paymentImg, setPaymentImg] = useState("")
   // const [file, setFile] = useState(null)
   // const [uploadSpin, setUploadSpin] = useState(false)
@@ -182,6 +183,10 @@ const Order = () => {
   }, [deliveryOption, cart])
 
   const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
+ 
+ useEffect(()=>{
+   setAmountInSuccess(totalAmountValue)
+ },[totalAmountValue])
 
   const emailData = {
     to: `${data.email}, iskconyanamstores@gmail.com`,
@@ -440,7 +445,7 @@ const Order = () => {
                   <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to given below WhatsApp number on the same day of the order.
 
                   </h5>
-                  <a href='https://wa.me/918500961256' className='text-green-700 font-bold flex items-center gap-1 '> <FaWhatsapp size={21}/> 8500961256</a>
+                  <a href='https://wa.me/918500961256' className='text-green-700 font-bold flex items-center gap-1 '> <FaWhatsapp size={21} /> 8500961256</a>
 
                   <button type='submit' className="mt-4 bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
                   >
@@ -488,7 +493,7 @@ const Order = () => {
                   <h5 className='mt-2 '><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to given below WhatsApp number the same day of the order.
 
                   </h5>
-                  <a href='https://wa.me/918500961256' className='text-green-700 font-bold flex items-center gap-1 '> <FaWhatsapp size={21}/> 8500961256</a>
+                  <a href='https://wa.me/918500961256' className='text-green-700 font-bold flex items-center gap-1 '> <FaWhatsapp size={21} /> 8500961256</a>
                   <button type='submit' className="mt-4  bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
                   >
                     PLACE ORDER
@@ -580,7 +585,7 @@ const Order = () => {
       {orderOk && <div className='px-5 fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-white text-black'>
         <div className='text-center flex flex-col items-center justify-center'>
           <FaCircleCheck size={150} className='text-green-500' />
-          <h4 className='mt-4 text-2xl font-semibold'>₹{totalAmountValue}</h4>
+          <h4 className='mt-4 text-2xl font-semibold'>₹{amountInSuccess}</h4>
           <h2 className="text-black text-2xl mt-1">Order Placed Successfully!</h2>
 
           <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
