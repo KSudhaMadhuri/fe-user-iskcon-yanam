@@ -230,6 +230,8 @@ const Order = () => {
         `).join('')}
       </div>
       <h4>Payment Details</h4>
+      <h4><span>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256'>8500961256</a> on the same day of the order.
+</h4>
       <h3><strong>Total Amount :</strong> ₹${totalAmountValue}</h3>
       <ul>
         <li><strong>Total Items:</strong> ${cart.length}</li>
@@ -307,7 +309,7 @@ const Order = () => {
   // order placing function
   const formFunc = async (e) => {
     e.preventDefault()
-    const isOk = confirm("Order will be placed, are you sure ?")
+    const isOk = confirm("Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at 8500961256 on the same day of the order.")
     if (isOk) {
       setOrderSpin(true)
 
@@ -434,7 +436,7 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
-                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please upload the payment receipt to WhatsApp at <a href='https://wa.me/8500961256
+                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256
 ' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
 
                   </h5>
@@ -481,7 +483,9 @@ const Order = () => {
                     TOTAL COST :
                     <span className="text-black pl-1">₹{deliveryOption === "takeaway" ? `${itemsAmount.toLocaleString("en-IN")}` : `${totalAmount.toLocaleString("en-IN")}`}</span>
                   </h3>
+                  <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
 
+                  </h5>
                   <button type='submit' className="mt-4  bg-yellow-500 hover:bg-yellow-700 text-white w-full font-bold h-12 rounded-full"
                   >
                     PLACE ORDER
@@ -573,10 +577,16 @@ const Order = () => {
       {orderOk && <div className='px-5 fixed flex justify-center h-screen w-screen items-center top-0 left-0 bg-white text-black'>
         <div className='text-center flex flex-col items-center justify-center'>
           <FaCircleCheck size={150} className='text-green-500' />
-          <h2 className="text-black text-2xl mt-4">Order Placed Successfully!</h2>
+        <h4 className='mt-4 text-2xl font-semibold'>₹{totalAmountValue}</h4>
+          <h2 className="text-black text-2xl mt-1">Order Placed Successfully!</h2>
+          
+          <h5 className='mt-2'><span className='font-bold text-red-500'>Note : </span>Orders will be processed only after full payment. Please send the payment receipt to WhatsApp at <a href='https://wa.me/918500961256' className='text-green-700 font-bold'>8500961256</a> on the same day of the order.
+
+</h5>
           <p className="text-black text-lg mt-2">
             You will receive the order details in your email.
           </p>
+
           <Link to="/" className="text-blue-700 font-semibold">Continue Shopping</Link>
         </div>
 
