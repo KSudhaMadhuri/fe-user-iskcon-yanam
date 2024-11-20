@@ -26,7 +26,6 @@ const ProductOverView = () => {
       });
     } catch (error) {
       console.error(error);
-      toast.error("Please try again.");
     }
   };
 
@@ -75,14 +74,14 @@ const ProductOverView = () => {
       {spin ?
         <div className='mt-20 pt-20 flex justify-center items-center font-semibold text-xl ' style={{ height: "70vh" }}>
           <div
-          className="border-t-4 border-solid rounded-full w-9 h-9 animate-spin"
-          style={{
-            borderWidth: '5px',
-            borderColor: 'blue',
-            borderTopColor: 'white',
-            borderStyle: 'solid',
-          }}
-        ></div>
+            className="border-t-4 border-solid rounded-full w-9 h-9 animate-spin"
+            style={{
+              borderWidth: '5px',
+              borderColor: 'blue',
+              borderTopColor: 'white',
+              borderStyle: 'solid',
+            }}
+          ></div>
         </div> : <section className="text-gray-600 body-font overflow-hidden">
           <div className=" px-5 py-24 pb-8 mx-auto">
             <div className="flex flex-row gap-4  justify-betweeen w-full flex-wrap">
@@ -116,19 +115,28 @@ const ProductOverView = () => {
                 </div>
 
                 {data.outOfStock === "stock" && (<>
+                  <div className='hidden md:block'>
 
-                  <div className="flex gap-3 justify-start my-5">
+                    <div className="flex gap-3 justify-start my-5">
 
-                    {cart.some((item) => item._id === data._id) ? <Link to="/cart" className=" bg-indigo-800 w-[12rem] text-center font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
-                      GO TO CART
-                    </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r w-[12rem] from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
-                      ADD TO CART
-                    </button>}
-                    {/* <Link to="/order" onClick={() => addCartFunc(data._id)} className="bg-yellow-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded-full">
-                      BUY NOW
-                    </Link> */}
+                      {cart.some((item) => item._id === data._id) ? <Link to="/cart" className=" bg-indigo-800 w-[12rem] text-center font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                        GO TO CART
+                      </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r w-[12rem] from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                        ADD TO CART
+                      </button>}
+
+                    </div>
                   </div>
 
+                  <div className="fixed bottom-2 left-2 right-2">
+
+                    {cart.some((item) => item._id === data._id) ? <Link to="/cart" className="block bg-indigo-800 w-full text-center font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                      GO TO CART
+                    </Link> : <button onClick={() => addCartFunc(data._id)} className="bg-gradient-to-r w-full from-indigo-700 to-orange-500 font-semibold text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">
+                      ADD TO CART
+                    </button>}
+
+                  </div>
                 </>)}
 
                 {data.outOfStock === "outofstock" &&
@@ -172,7 +180,12 @@ const ProductOverView = () => {
       {/* you may also like products page */}
       {
         spin ? "" : <>  <Products />
-          <Footer /></>
+          <div className='pb-12'>
+
+            <Footer />
+          </div>
+
+        </>
       }
 
     </>
