@@ -37,6 +37,9 @@ const Order = () => {
   });
 
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // products handling function 
   useEffect(() => {

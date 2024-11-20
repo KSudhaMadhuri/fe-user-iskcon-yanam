@@ -19,7 +19,9 @@ const Home = () => {
     localStorage.setItem("cart", JSON.stringify(addCart))
   }
 
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     document.title = "ISKCON Yanam Stores"

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Policies = () => {
     const {name} = useParams()
  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
+
   return (
     <div className="px-6 py-[5.7rem] bg-gray-50 text-gray-800">
       

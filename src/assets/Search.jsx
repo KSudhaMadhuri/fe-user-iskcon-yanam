@@ -14,6 +14,10 @@ const Search = () => {
 
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // search function 
   useEffect(() => {
     const searchresults = products.filter((item) =>

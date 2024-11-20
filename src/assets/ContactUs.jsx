@@ -51,6 +51,9 @@ const ContactUs = () => {
     }}
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     document.title = "Contact Us for any delivery queries"

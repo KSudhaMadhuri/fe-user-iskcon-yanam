@@ -15,6 +15,10 @@ const Cart = () => {
 
 
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   // remove item function 
   const removeItem = (itemId, itemName) => {
