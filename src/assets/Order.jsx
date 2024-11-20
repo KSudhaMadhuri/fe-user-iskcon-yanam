@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { productsContext } from '../App'
-
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
 import { FaCircleCheck, FaDownload, FaUpload, FaWhatsapp } from 'react-icons/fa6'
@@ -177,16 +176,14 @@ const Order = () => {
 
   useEffect(() => {
     const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
-    const amountInPaisa = totalAmountValue * 100
-    const exactAmountInPaisa = Math.round(amountInPaisa)
-    setPayAmount(exactAmountInPaisa)
-  }, [deliveryOption, cart])
+    // const amountInPaisa = totalAmountValue * 100
+    // const exactAmountInPaisa = Math.round(amountInPaisa)
+    // setPayAmount(exactAmountInPaisa)
+    // console.log(totalAmountValue);
+    setAmountInSuccess(totalAmountValue)
+  }, [deliveryOption])
 
   const totalAmountValue = deliveryOption === "takeaway" ? itemsAmount : totalAmount;
- 
- useEffect(()=>{
-   setAmountInSuccess(totalAmountValue)
- },[totalAmountValue])
 
   const emailData = {
     to: `${data.email}, iskconyanamstores@gmail.com`,
@@ -389,14 +386,14 @@ const Order = () => {
                 <h2 className="font-bold  text-orange-600">
                   PAYMENT DETAILS
                 </h2>
-
+<h4 className='font-medium'>SCAN QR CODE</h4>
                 <img
                   src="/qrcode.jpg"
                   alt="qr_code"
                   className="border-2 my-2 h-52 w-52 rounded "
                 />
                 {/* <span className='font-bold mb-1'>OR</span> */}
-                <img src="/allpayments.png" className=' w-full' alt="all_upi_logo" />
+                <img src="/allpayments.png" className='w-[60%] mb-1 ' alt="all_upi_logo" />
                 <h6 className='text-blue-600 font-bold'>PAY TO THIS NUMBER</h6>
                 <span className='font-bold'>8500961256</span>
 
