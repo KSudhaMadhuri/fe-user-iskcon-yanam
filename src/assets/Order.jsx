@@ -399,7 +399,7 @@ const Order = () => {
                 <img src="/allpayments.png" className='w-[60%] mb-1 ' alt="all_upi_logo" />
                 <h6 className='text-blue-600 font-bold'>PAY TO THIS NUMBER</h6>
                 <span className='font-bold my-1'>8500961256</span>
-                  <h4 className='text-center'>Banking Name : <span className='font-semibold'>KANCHARLA SUDHA MADHURI</span></h4>
+                  <h4 className='text-center'>Banking Name : <span className='font-bold '>KANCHARLA SUDHA MADHURI</span></h4>
 
                 <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-6 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
 
