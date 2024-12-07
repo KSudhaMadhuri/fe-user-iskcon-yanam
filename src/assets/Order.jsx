@@ -66,7 +66,7 @@ const Order = () => {
     setItemsAmount(total.toFixed(2))
 
     // caluculating total grams 
-    let totalGrams = 30
+    let totalGrams = 20
     const totalBookGrams = cart.reduce((acc, item) => {
       return acc + parseInt(item.bookWeight * item.qty)
     }, 0)
@@ -87,16 +87,28 @@ const Order = () => {
     const coverCharges = 16
     const extraCharges = 16
 
-    const removedGrams = totalGrams > baseGrams ? totalGrams - baseGrams : false
+    const removedGrams = totalGrams <= baseGrams ?  false :  totalGrams
+    // console.log(totalGrams);
+    // console.log(removedGrams);
+    
     const remGrams = removedGrams === false ? 1 : removedGrams / 500
+    // console.log(remGrams);
     const roundNum = remGrams <= 1 ? 1 : remGrams
+    // console.log(roundNum);
+    
     const roundedNumber = Math.ceil(roundNum);
+    // console.log(roundedNumber);
+    
     const multipleAmount = roundedNumber === 1 ? false : roundedNumber * extraCharges
-    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + basePirce + postCharges
-    setOtherWeightCharges((multipleAmount + basePirce).toFixed(2))
+    // console.log(multipleAmount);
+    
+    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + postCharges
+    setOtherWeightCharges((addingAllPrices - postCharges).toFixed(2))
+    
     const withGst = addingAllPrices * 1.18
     const showGst = withGst - addingAllPrices
     setOtherGst(showGst.toFixed(2))
+    
     const finalAmount = (total + withGst + coverCharges).toFixed(2)
     const itemType = cart.some((item) => item.itemType === "other")
 
@@ -389,17 +401,17 @@ const Order = () => {
                 <h2 className="font-bold  text-orange-600">
                   PAYMENT DETAILS
                 </h2>
-<h4 className='font-medium'>SCAN QR CODE</h4>
+                <h4 className='font-medium'>SCAN QR CODE</h4>
                 <img
                   src="/qrcode.jpg"
                   alt="qr_code"
                   className="border-2 my-2 h-52 w-52 rounded "
-                  />
+                />
                 {/* <span className='font-bold mb-1'>OR</span> */}
                 <img src="/allpayments.png" className='w-[60%] mb-1 ' alt="all_upi_logo" />
                 <h6 className='text-blue-600 font-bold'>PAY TO THIS NUMBER</h6>
                 <span className='font-bold my-1'>8500961256</span>
-                  <h4 className='text-center'>Banking Name : <span className='font-bold '>KANCHARLA SUDHA MADHURI</span></h4>
+                <h4 className='text-center'>Banking Name : <span className='font-bold '>KANCHARLA SUDHA MADHURI</span></h4>
 
                 <a href="/qrcode.jpg" className=' animate-bounce text-md font-semibold px-3 h-[2.5rem] mt-6 flex items-center gap-2 rounded-full text-white bg-orange-600' download="/qrcode.jpg"><FaDownload />Download QR Code</a>
 
