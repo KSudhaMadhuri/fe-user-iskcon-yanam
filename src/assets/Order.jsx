@@ -87,28 +87,29 @@ const Order = () => {
     const coverCharges = 10
     const extraCharges = 16
 
-    const removedGrams = totalGrams <= baseGrams ?  false :  totalGrams
+    const removedGrams = totalGrams <= baseGrams ? false : totalGrams
     // console.log(totalGrams);
     // console.log(removedGrams);
-    
+
     const remGrams = removedGrams === false ? 1 : removedGrams / 500
     // console.log(remGrams);
     const roundNum = remGrams <= 1 ? 1 : remGrams
     // console.log(roundNum);
-    
+
     const roundedNumber = Math.ceil(roundNum);
     // console.log(roundedNumber);
-    
+
     const multipleAmount = roundedNumber === 1 ? false : roundedNumber * extraCharges
     // console.log(multipleAmount);
-    
-    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + 3
+
+    const addingAllPrices = multipleAmount === false ? basePirce : multipleAmount + 3
     setOtherWeightCharges(addingAllPrices.toFixed(2))
-    
-    const withGst = (addingAllPrices + postCharges) * 1.18
-    const showGst = withGst - addingAllPrices
+
+    const addedPostCharges = addingAllPrices + postCharges
+    const withGst = addedPostCharges * 1.18
+    const showGst = withGst - addedPostCharges
     setOtherGst(showGst.toFixed(2))
-    
+
     const finalAmount = (total + withGst + coverCharges).toFixed(2)
     const itemType = cart.some((item) => item.itemType === "other")
 
