@@ -84,7 +84,7 @@ const Order = () => {
     const baseGrams = 500
     const basePirce = 19
     const postCharges = 17
-    const coverCharges = 16
+    const coverCharges = 10
     const extraCharges = 16
 
     const removedGrams = totalGrams <= baseGrams ?  false :  totalGrams
@@ -102,10 +102,10 @@ const Order = () => {
     const multipleAmount = roundedNumber === 1 ? false : roundedNumber * extraCharges
     // console.log(multipleAmount);
     
-    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + postCharges
-    setOtherWeightCharges((addingAllPrices - postCharges).toFixed(2))
+    const addingAllPrices = multipleAmount === false ? basePirce + postCharges : multipleAmount + 3
+    setOtherWeightCharges(addingAllPrices.toFixed(2))
     
-    const withGst = addingAllPrices * 1.18
+    const withGst = (addingAllPrices + postCharges) * 1.18
     const showGst = withGst - addingAllPrices
     setOtherGst(showGst.toFixed(2))
     
@@ -447,7 +447,7 @@ const Order = () => {
                   <div class="flex justify-between py-3 border-b w-full px-5">
                     <span class="text-gray-900">Packaging Charges</span>
                     <div class="flex items-center">
-                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "16"}</span>
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "10"}</span>
 
                     </div>
                   </div>
@@ -495,7 +495,7 @@ const Order = () => {
                   <div class="flex justify-between py-3 border-b w-full px-5">
                     <span class="text-gray-900">Packaging Charges</span>
                     <div class="flex items-center">
-                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "16"}</span>
+                      <span class="font-semibold text-gray-700">₹{deliveryOption === "takeaway" ? "0" : "10"}</span>
 
                     </div>
                   </div>
